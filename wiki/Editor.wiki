@@ -2,4 +2,4 @@
 
 Макросы доступные в контексте Editor
 
- * [Editor_CopyWord]
+ * [Editor_CopyWord Копировать текущее слово]
