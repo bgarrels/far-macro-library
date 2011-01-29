@@ -1,9 +1,6 @@
 #summary Ручной ввод и исполнение макроса в любом контексте
 
-= Introduction =
-
-Add your content here.
-
+[CommonMacros Общие макросы]
 
 === Текст ===
 
