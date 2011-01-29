@@ -6,24 +6,20 @@
 = Текст =
 
 {{{
-macro
-  Descr="Use Alt-Digit to switch between screens"
-  Bind="Alt1 Alt2 Alt3 Alt4 Alt5 Alt6 Alt7 Alt8 Alt9 Alt0 Alt`"
-  Area="Shell Editor Viewer"
-{{
-//%s = Key(#AKey);
-  %s = AKey(1);
-  $if (%s == "Alt`")
-    %c = "0";
-  $else
-    %c = substr(%s, len(%s) - 1, 1);
-  $end
+;; Переключение между экранами по Alt-Цифра
+macro 
+  Descr="Use Alt-Digit to switch between screens" 
+  Bind="Alt1 Alt2 Alt3 Alt4 Alt5 Alt6 Alt7 Alt8 Alt9 Alt0" 
+  Area="Shell Editor Viewer" 
+{{ 
+  %s = Key(#AKey);  
+  %c = substr(%s, len(%s) - 1, 1);
   F12
-  $If (CheckHotkey (%c))
+  $If ( CheckHotkey (%c) )
     eval(%c)
   $Else
     Esc
-    Beep()
+    eval(%s)
   $End
 }}
 }}}
