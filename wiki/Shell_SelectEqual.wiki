@@ -1,4 +1,4 @@
-#summary Выделить одинаковые файлы на обеих панелях
+#summary Выделить одинаковые файлы на обеих панелях (c) John Doe
 
  * [ShellMacros Макросы для панелей]
 
@@ -8,8 +8,6 @@
 
  Источник:<br>
  http://forum.farmanager.com/viewtopic.php?f=15&t=5915
-
- (c) John Doe
 
 === Текст ===
 
