@@ -1,0 +1,27 @@
+#summary Ручной ввод и исполнение макроса в любом контексте
+
+ * [CommonMacros Общие макросы]
+
+=== Текст ===
+
+{{{
+macro
+  Name = "InputMacro"
+  Descr = "Input Macro"
+  Key = "CtrlAltF12"
+{{
+  $while (1)
+    %s = prompt("Run Macro", "Input macro:", 0, "", "Macro.Text");
+    $if (%s == "")
+      $exit
+    $end
+
+    $if (eval(%s, 1) == 0)
+      eval(%s);
+      $exit
+    $else
+      eval(%s);  // Чтобы показать ошибку
+    $end
+  $end
+}}
+}}}
