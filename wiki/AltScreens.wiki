@@ -1,12 +1,10 @@
 #summary Переключение между окнами по Alt-Цифра
 
-= Скачать FML =
-
-[http://far-macro-library.googlecode.com/files/AltScreens.fml FML]
-
 = Описание =
 
 = Текст =
+
+[http://far-macro-library.googlecode.com/files/AltScreens.fml FML]
 
 {{{
 ;; Переключение между экранами по Alt-Цифра
@@ -26,3 +24,4 @@ macro
   $End
 }}
 }}}
+
