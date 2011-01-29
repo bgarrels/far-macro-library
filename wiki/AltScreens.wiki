@@ -1,7 +1,10 @@
 #summary Переключение между окнами по Alt-Цифра
 
-= Описание =
+= Скачать FML =
 
+http://far-macro-library.googlecode.com/files/AltScreens.fml
+
+= Описание =
 
 = Текст =
 
