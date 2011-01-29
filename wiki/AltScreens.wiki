@@ -1,13 +1,29 @@
 #summary Переключение между окнами по Alt-Цифра
 
-= Introduction =
-
-Add your content here.
+= Описание =
 
 
-= Details =
+= Текст =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+{{{
+macro
+  Descr="Use Alt-Digit to switch between screens"
+  Bind="Alt1 Alt2 Alt3 Alt4 Alt5 Alt6 Alt7 Alt8 Alt9 Alt0 Alt`"
+  Area="Shell Editor Viewer"
+{{
+//%s = Key(#AKey);
+  %s = AKey(1);
+  $if (%s == "Alt`")
+    %c = "0";
+  $else
+    %c = substr(%s, len(%s) - 1, 1);
+  $end
+  F12
+  $If (CheckHotkey (%c))
+    eval(%c)
+  $Else
+    Esc
+    Beep()
+  $End
+}}
+}}}
