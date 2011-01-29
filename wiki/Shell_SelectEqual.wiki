@@ -1,0 +1,22 @@
+#summary Выделить одинаковые файлы на обеих панелях
+
+= Introduction =
+
+Add your content here.
+
+
+= Текст =
+
+{{{
+macro Descr="Select same filenames on both panels" Area="Shell" Key="CtrlAltF12"
+{{
+  // (c) John Doe
+  clip(5)
+  panel.select(0,1)
+  CtrlShiftIns
+  panel.select(1,1,2,clip(0))
+  Tab CtrlShiftIns Tab
+  panel.select(0,0)
+  panel.select(0,1,2,clip(0))
+}}
+}}}
