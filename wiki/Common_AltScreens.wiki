@@ -2,10 +2,6 @@
 
  * [Common Общие макросы]
 
-=== Загрузить ===
-
- * [http://far-macro-library.googlecode.com/files/AltScreens.fml FML]
-
 === Текст ===
 
 {{{
