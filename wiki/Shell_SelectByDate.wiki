@@ -1,0 +1,35 @@
+#summary One-sentence summary of this page.
+
+=== Описание ===
+
+ Макросы для выделения файлов/папок с датой как у текущего
+
+ Источник:<br>
+ http://forum.farmanager.com/viewtopic.php?f=15&t=5823
+
+=== Text ===
+
+{{{
+macro Descr="Select all files/folders with current file's date" Area="Shell" Key="CtrlAltF12"
+{{
+  %i=SubStr(Panel.Item(0,0,5),0,10); 
+  $Rep (APanel.ItemCount) 
+    %a=SubStr(Panel.Item(0,RCounter,5),0,10);
+    $If (%a==%i) 
+      Panel.Select(0,1,1,RCounter) 
+    $End 
+  $End
+}}
+
+
+macro Descr="Deselect all files/folders with current file's date" Area="Shell" Key="CtrlAltF12"
+{{
+  %i=SubStr(Panel.Item(0,0,5),0,10); 
+  $Rep (APanel.ItemCount) 
+    %a=SubStr(Panel.Item(0,RCounter,5),0,10); 
+    $If (%a==%i) 
+      Panel.Select(0,0,1,RCounter)
+    $End 
+  $End
+}}
+}}}
