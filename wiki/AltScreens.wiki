@@ -2,7 +2,7 @@
 
 = Скачать FML =
 
-http://far-macro-library.googlecode.com/files/AltScreens.fml
+[http://far-macro-library.googlecode.com/files/AltScreens.fml FML]
 
 = Описание =
 
