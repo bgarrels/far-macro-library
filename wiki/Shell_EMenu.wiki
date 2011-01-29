@@ -17,12 +17,10 @@ macro Descr="EMenu: Key Activation" Area="Shell" Key="Apps" RunOnRelease=1
   $end
 }}
 
-
 macro Descr="EMenu: Mouse Activation" Area="Shell" Key="MSRClick" EatOnRun=0 
 {{
   MSRClick
 }}
-
 
 macro Descr="EMenu: Mouse Activation" Area="Shell" Key="MSRClick:Release" EatOnRun=0 
 {{
