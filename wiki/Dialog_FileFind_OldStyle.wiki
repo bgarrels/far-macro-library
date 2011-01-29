@@ -1,10 +1,13 @@
-#summary Макрос возвращающий поиску прежнее поведение(c) John Doe
+#summary Макрос возвращающий поиску прежнее поведение (c) John Doe
 
  * [Dialog Макросы для диалогов]
 
-=== Загрузить ===
+=== Описание ===
 
- * [http://far-macro-library.googlecode.com/files/AltScreens.fml FML]
+ Макрос возвращающий поиску прежнее поведение
+
+ Источник:<br>
+ http://forum.farmanager.com/viewtopic.php?f=15&t=3392
 
 === Текст ===
 
