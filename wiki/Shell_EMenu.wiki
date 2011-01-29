@@ -9,7 +9,7 @@
 === Текст ===
 
 {{{
-macro Descr="EMenu: Key Activation" Area="Shell" Key="Apps" RunOnRelease=1
+macro Descr="EMenu: Key Activation" Area="Shell" Key="Apps:Release" 
 {{
   F11 
   $if (Menu.Select("EMenu") > 0) 
