@@ -6,6 +6,9 @@
 
   Макрос удаления конечных пробелов и табов.
 
+  Источник:<br>
+  http://forum.farmanager.com/viewtopic.php?f=15&t=5518&start=0
+
 === Текст ===
 
 {{{
