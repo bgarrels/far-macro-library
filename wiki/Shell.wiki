@@ -2,6 +2,8 @@
 
 Макросы доступные в контексте Shell
 
+ * [Shell_EMenu Макросы для плагина EMenu]
+
  * [Shell_SelectEqual Выделить одинаковые файлы на обеих панелях] (c) John Doe 
 
  * [Shell_SelectByDate Выделить файлы/папки с датой как у текущего] (c) Fibre
