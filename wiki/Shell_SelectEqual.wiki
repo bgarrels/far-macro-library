@@ -4,9 +4,12 @@
 
 === Описание ===
 
-Выделить одинаковые файлы на обеих панелях
-Источник: http://forum.farmanager.com/viewtopic.php?f=15&t=5915
-(c) John Doe
+ Выделяет одинаковые файлы на обеих панелях
+
+ Источник:<br>
+ http://forum.farmanager.com/viewtopic.php?f=15&t=5915
+
+ (c) John Doe
 
 === Текст ===
 
