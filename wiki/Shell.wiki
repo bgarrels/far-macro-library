@@ -8,4 +8,4 @@
 
  * [Shell_SelectByDate Выделить файлы/папки с датой как у текущего] (c) Fibre
 
- * [Shell_SynchoMove Синхронное движение по обеим панелям] (c) Maximus5
+ * [Shell_SynchroMove Синхронное движение по обеим панелям] (c) Maximus5
