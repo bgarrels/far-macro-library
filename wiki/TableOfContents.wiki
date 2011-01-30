@@ -1,5 +1,4 @@
-﻿#labels Featured
-#sidebar
+﻿#sidebar
 ==Contents==
   * [Common Общие макросы]
   * [Shell Макросы для панелей]
