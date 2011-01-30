@@ -1,10 +1,10 @@
 #summary Prepare drive for safe removal
 
-=== Описание ===
+=== Description ===
 
  I'm lazy to select drive (in the Drive menu !AltF1/!AltF2) and depress !ShiftDel. So, depressing AltB (AltE) will prepare drive B: (E:) for safe removal.
 
-=== Текст ===
+=== Text===
 {{{
 macro Descr="Safe remove drive B/E" Area="Disks" Key="AltB AltE"
 {{
