@@ -1,0 +1,38 @@
+#summary Синхронное движение по обеим панелям
+
+{{{
+macro Area="Shell" Key="AltBS AltShiftPgUp AltShiftBS" Cond="CmdLine:0" Descr="На уровень вверх на обоих панелях"
+{{
+  CtrlPgUp Tab CtrlPgUp Tab
+}}
+
+macro Descr="Войти в каталог на обеих панелях"
+      Area="Shell" Key="AltShiftPgDn"
+{{
+  CtrlPgDn Tab CtrlPgDn Tab
+}}
+
+macro Descr="Перейти в следующую папку на верхнем уровне на обеих панелях"
+      Area="Shell" Key="AltDown"
+{{
+  CtrlPgUp Down CtrlPgDn Tab CtrlPgUp Down CtrlPgDn Tab
+}}
+
+macro Descr="Перейти в предыдущую папку на верхнем уровне на обеих панелях"
+      Area="Shell" Key="AltUp"
+{{
+  CtrlPgUp Up CtrlPgDn Tab CtrlPgUp Up CtrlPgDn Tab
+}}
+
+macro Descr="Перейти к следующему элементу на обеих панелях"
+      Area="Shell" Key="AltShiftDown"
+{{
+  Down Tab Down Tab
+}}
+
+macro Descr="Перейти к предыдущему элементу на обеих панелях"
+      Area="Shell" Key="AltShiftUp"
+{{
+  Up Tab Up Tab
+}}
+}}}
