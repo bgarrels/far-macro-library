@@ -1,0 +1,29 @@
+#summary Информация по текущей MacroArea
+
+=== Описание ===
+
+Может быть полезно при написании своих макросов, или просто для информации о том, что сейчас происходит в фаре
+
+=== Тест ===
+
+{{{
+macro Descr="Информация по MacroArea/Диалогу" Key="CtrlAltF12"
+{{
+  %s = "MacroArea="+MacroArea+"\n"+"Title=«"+Title+"»";
+  $if (Menu||MainMenu||UserMenu||Disks)
+    %s = %s + "\nMenu.Value=«"+Menu.Value+"»";
+  $end
+  $if (Dialog)
+    %s = %s + "\nDlg.Info.Id=«"+Dlg.Info.Id+"»";
+    %s = %s + "\nDlg.ItemCount="+Dlg.ItemCount+"; .CurPos="+Dlg.CurPos+"; .ItemType="+Dlg.ItemType+"; Value=«"+dlg.getvalue(Dlg.CurPos,0)+"»";
+  $end
+  $if (Shell)
+    %s = %s + "\nFilePanel="+APanel.FilePanel+"; Plugin="+APanel.Plugin+"; CurPos="+APanel.CurPos+"; ItemCount="+APanel.ItemCount+"; SelCount="+APanel.SelCount;
+    %s = %s + "\nCurrent=«"+APanel.Current+"»\nPath=«"+APanel.Path+"»";
+    $if (APanel.Plugin)
+      %s = %s + "\nPrefix=«"+APanel.Prefix+"»\nHostFile=«"+APanel.HostFile+"»";
+    $end
+  $end
+  MsgBox("Current info",%s)
+}}
+}}}
