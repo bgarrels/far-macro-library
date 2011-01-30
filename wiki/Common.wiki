@@ -1,13 +1,13 @@
 #summary Common macros
 
-Please, translate
+Macroses, available in the any context (almost).
 
-Макросы, которые доступны в любом контексте (или в большинстве)
+ * [Common_AltScreens Switch between Far windows by Alt-Number]
 
- * [Common_AltScreens Переключение между окнами по Alt-Цифра]
+ * [Common_InputMacro Execute manually typed macros in the any context]
 
- * [Common_InputMacro Ручной ввод и исполнение макроса в любом контексте]
+ * [Common_Wheel Speed up mouse wheel scrolling] (c) SimSU
 
- * [Common_Wheel Ускорение скроллинга колесиком мышки] (c) SimSU
+ * [Common_F11 F11 - autoselect last used plugin in the plugins menu] (c) Maximus5
 
- * [Common_F11 F11 - выделение в меню плагинов предыдущего выбранного] (c) Maximus5
+ * [Common_MacroAreaInfo Display information about current MacroArea]

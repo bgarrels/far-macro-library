@@ -9,3 +9,5 @@
  * [Common_Wheel Ускорение скроллинга колесиком мышки] (c) SimSU
 
  * [Common_F11 F11 - выделение в меню плагинов предыдущего выбранного] (c) Maximus5
+
+ * [Common_MacroAreaInfo Информация по текущей MacroArea]
