@@ -1,8 +1,8 @@
-#summary Переключение между окнами по Alt-Цифра
+#summary Use Alt-Digit to switch between screens
 
- * [Common Общие макросы]
+ * [Common Common macros]
 
- * [http://far-macro-library.googlecode.com/svn/trunk/Common/AltScreens.fml Скачать FML]
+ * [http://far-macro-library.googlecode.com/svn/trunk/Common/AltScreens.fml Download FML]
 
 === Текст ===
 
