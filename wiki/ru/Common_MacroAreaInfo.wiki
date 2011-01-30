@@ -1,12 +1,12 @@
-#summary Display current MacroArea/Dialog GUID information
+#summary Информация по текущей MacroArea/GUID диалога
 
-=== Description ===
+=== Описание ===
 
-This macros may be useful, while designing yours own macroses, or just for information about current state of Far manager.
+Может быть полезно при написании своих макросов, или просто для информации о том, что сейчас происходит в фаре.
 
-=== Text ===
+=== Текст ===
 {{{
-macro Descr="Current MacroArea/Dialog GUID information" Key="CtrlAltF12"
+macro Descr="Информация по MacroArea/Диалогу" Key="CtrlAltF12"
 {{
   %s = "MacroArea="+MacroArea+"\n"+"Title=«"+Title+"»";
   $if (Menu||MainMenu||UserMenu||Disks)
