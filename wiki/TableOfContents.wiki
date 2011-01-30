@@ -1,0 +1,8 @@
+﻿#labels Featured
+#sidebar
+==Contents==
+  * [Common Общие макросы]
+  * [Shell Макросы для панелей]
+  * [Shell Макросы для панелей]
+  * [Editor Макросы для редактора]
+  * [Dialog Макросы для диалогов]
