@@ -1,4 +1,6 @@
-#summary Макросы для редактора
+#summary Editor macros
+
+Please, translate
 
 Макросы доступные в контексте Editor
 
