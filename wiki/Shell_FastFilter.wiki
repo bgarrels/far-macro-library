@@ -16,4 +16,4 @@
 
 === Текст ===
 
- * [http://far-macro-library.googlecode.com/svn/trunk/Shell/FastFilter.fml Download FML]
+ * [http://far-macro-library.googlecode.com/svn/trunk/Shell/FastFilter.fml Загрузить FML]
