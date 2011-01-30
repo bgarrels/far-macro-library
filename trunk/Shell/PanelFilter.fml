@@ -1,0 +1,76 @@
+macro Descr = "Panel Filter: Unselect all filters" Key = "CtrlAltMultiply"
+Area = "Shell"
+{{
+CtrlI
+ShiftBS
+Enter
+}}
+
+
+macro Descr = "Panel Filter: Filter files with same extentions as current or selected"
+Area = "Shell"
+Key="CtrlAltAdd CtrlAltSubtract CtrlAltI"
+{{
+   $if(APanel.Folder)
+      $exit
+      $end
+   %extentions = ""; ;; list of all selected extentions
+   %curExt = ""; ;; current extention.
+
+      %curPos = APanel.CurPos;
+      $if(APanel.SelCount>0)
+         %i = 1;
+      $else
+         %i = 0;
+         $end
+
+      $while(%i<=APanel.SelCount)
+         panel.setposidx(0,%i,1)
+         %curExt = fsplit(APanel.Current, 0x00000008);
+         $if(%curExt == "") ;; empty extention or file without name
+            $if (substr(APanel.Current,0,1)==".")
+               %curExt = APanel.Current;
+            $else
+               %curExt = "*.";
+               $end
+            $end
+         $if(index(%extentions, %curExt)== -1)
+            %extentions = %extentions + "\t"+%curExt;
+            $end
+         %i = %i+1;
+         $end
+      %extentions = trim(%extentions, 1);
+      panel.setposidx(0, %curPos);
+   %key = Key(#AKey);
+   CtrlI
+
+   $while(len(%extentions)>0)
+      %i=%i+1;
+      $if(%i>20)
+         msgbox("error", "%i>20",1);
+         $exit
+         $end
+      %index = rindex(%extentions,"\t");
+      $if(%index == -1) ;; last extention.
+         %curExt = trim(%extentions);
+         %extentions = "";
+      $else
+         %curExt = substr(%extentions, %index+1);
+         %extentions = trim(substr(%extentions,0, %index));
+         $end
+
+      End
+      menu.select(%curExt, 2, 1);
+      $if (%key == "CtrlAltSubtract")
+         -
+         $end
+      $if (%key == "CtrlAltAdd")
+         +
+         $end
+      $if (%key == "CtrlAltI")
+         $exit
+         $end
+      $end
+
+   Enter
+}}
