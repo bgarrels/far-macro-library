@@ -1,4 +1,6 @@
-#summary Макросы для панелей
+#summary Shell macros
+
+Please, translate
 
 Макросы доступные в контексте Shell
 
