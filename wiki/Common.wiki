@@ -1,4 +1,6 @@
-#summary Общие макросы
+#summary Common macros
+
+Please, translate
 
 Макросы, которые доступны в любом контексте (или в большинстве)
 
