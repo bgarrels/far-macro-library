@@ -2,6 +2,8 @@
 
  * [Common Общие макросы]
 
+ * [http://far-macro-library.googlecode.com/svn/trunk/Common/AltSceens.fml Скачать FML]
+
 === Текст ===
 
 {{{
