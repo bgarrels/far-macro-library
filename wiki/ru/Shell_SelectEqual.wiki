@@ -1,0 +1,25 @@
+#summary Выделить одинаковые файлы на обеих панелях (c) John Doe
+
+ * [Shell Макросы для панелей]
+
+=== Описание ===
+
+ Выделяет одинаковые файлы на обеих панелях
+
+ Источник:<br>
+ http://forum.farmanager.com/viewtopic.php?f=15&t=5915
+
+=== Текст ===
+
+{{{
+macro Descr="Select same filenames on both panels" Area="Shell" Key="CtrlAltF12"
+{{
+  clip(5)
+  panel.select(0,1)
+  CtrlShiftIns
+  panel.select(1,1,2,clip(0))
+  Tab CtrlShiftIns Tab
+  panel.select(0,0)
+  panel.select(0,1,2,clip(0))
+}}
+}}}

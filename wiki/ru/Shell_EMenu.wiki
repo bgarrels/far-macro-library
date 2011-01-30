@@ -1,0 +1,32 @@
+#summary Макросы для плагина EMenu
+
+ * [Shell Макросы для панелей]
+
+=== Описание ===
+
+ Макросы вызывают плагин EMenu по нажатию правой кнопки мыши или клавиши Apps. Является полнофункциональной заменой плагина rcl2app. Для использования макроса плагин rcl2app нужно удалить - они конфликтуют.
+
+=== Текст ===
+
+{{{
+macro Descr="EMenu: Key Activation" Area="Shell" Key="Apps:Release" 
+{{
+  F11 
+  $if (Menu.Select("EMenu") > 0) 
+    Enter c 1
+  $end
+}}
+
+macro Descr="EMenu: Mouse Activation" Area="Shell" Key="MSRClick" EatOnRun=0 
+{{
+  MSRClick
+}}
+
+macro Descr="EMenu: Mouse Activation" Area="Shell" Key="MSRClick:Release" EatOnRun=0 
+{{
+  F11 
+  $if (Menu.Select("EMenu") > 0) 
+    Enter c 1
+  $end
+}}
+}}}

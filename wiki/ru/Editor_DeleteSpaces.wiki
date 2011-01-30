@@ -1,0 +1,25 @@
+#summary Макрос удаления конечных пробелов и табов? (с) SimSU
+
+ * [Editor Макросы для редактора]
+
+=== Описание ===
+
+  Макрос удаления пробелов и табов из окончаний строк, а также пустых строк из конца редактируемого файла с сохранением/восстановлением состояния поиска по регэкспам.
+
+  Источник:<br>
+  http://forum.farmanager.com/viewtopic.php?f=15&t=5518&start=0
+
+=== Текст ===
+
+{{{
+macro Descr = "Макрос удаления конечных пробелов и табов" Area = "Editor" Key = "CtrlAltF12"
+{{
+  %Fl=editor.pos(0,4); %Fc=editor.pos(0,5);
+  %Cl=editor.pos(0,1); %Cc=editor.pos(0,3);
+  CtrlHome CtrlF7 CtrlY print("\\s+?$") Tab CtrlY Tab Tab Tab Tab Add Enter
+  $IF (Dialog) Tab Enter $END
+  CtrlF7 CtrlDown $IF (ItemCount>1) ShiftDel Esc $Else ShiftDel $End Esc // Чистим историю.
+  editor.pos(1,1,%Cl) editor.pos(1,3,%Cc)
+  editor.pos(1,4,%Fl) editor.pos(1,5,%Fc)
+}}
+}}}

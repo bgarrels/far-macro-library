@@ -1,0 +1,83 @@
+#summary Макрос для проверки горячих клавиш в диалогах и меню
+
+ * [Dialog Макросы для диалогов]
+
+=== Описание ===
+
+ Источник<br>
+ http://forum.farmanager.com/viewtopic.php?f=15&t=6024
+
+=== Текст ===
+
+{{{
+macro Descr = "Check hotkeys" Area="Dialog Menu MainMenu UserMenu" Key="CtrlAltF12"
+{{
+  // Macro for check HotKeys © DAtaMan
+  %AreaForChecking = (AutoCompletion||Dialog||Disks||MainMenu||Menu||UserMenu);
+  %DialogArea = Dialog;
+  %MenuArea = (AutoCompletion||Disks||MainMenu||Menu||UserMenu);
+
+  $If (%AreaForChecking)
+    %I = 1;
+    %AllHotKeys = "";
+    %WithDupHotKeys = "";
+    %WithoutHotKeys = "";
+    %ItemCount = 0;
+
+    $If (%DialogArea)
+      %ItemCount = Dlg.ItemCount;
+    $End
+
+    $If (%MenuArea)
+      %ItemCount = ItemCount;
+    $End
+
+    $Rep (%ItemCount)
+      %NeedChecking = -1;
+      %HotKey = "";
+      $If (%DialogArea)
+        %ItemType = Dlg.GetValue(%I, 1);
+        %ItemText = Dlg.GetValue(%I, 10);
+        %NeedChecking = !((%ItemType >= 1 && %ItemType <= 6) || %ItemType == 10);
+        %Pos = Index(%ItemText, "&");
+        $If (%Pos >= 0)
+          %HotKey = Substr(%ItemText, %Pos + 1, 1);
+        $End
+      $End
+      $If (%MenuArea)
+        %ItemType = Menu.ItemStatus(%I) & 0x0000FFFF;
+        %ItemText = Menu.GetValue(%I);
+        %NeedChecking = 1;
+        %HotKey = GetHotKey(%I);
+      $End
+      $If (%NeedChecking)
+        $If (Len(%ItemText) > 0)
+          $If (Len(%HotKey) > 0)
+            $If (Index(%AllHotKeys, %HotKey) >= 0)
+              %WithDupHotKeys = %WithDupHotKeys + "'" + %ItemText + "'\n";
+            $Else
+              %AllHotKeys = %AllHotKeys + %HotKey;
+            $End
+          $Else
+            %WithoutHotKeys = %WithoutHotKeys + "'" + %ItemText + "'\n";
+          $End
+        $End
+      $End
+      %I = %I + 1;
+    $End
+
+    %S = "";
+    $If (Len(%WithoutHotKeys) > 0)
+      %S = %S + "─────── Items without HotKeys: ────────\n" + %WithoutHotKeys + "\n";
+    $End
+
+    $If (Len(%WithDupHotKeys) > 0)
+      %S = %S + "──── Items with duplicate HotKeys: ────\n" + %WithDupHotKeys + "\n";
+    $End
+
+    MsgBox("Assigned HotKeys for " + MacroArea + " '" + Title + "': " + %AllHotKeys, %S, 16); 
+  $Else
+    $Akey
+  $End
+}}
+}}}
