@@ -4,7 +4,7 @@
 
  * [http://far-macro-library.googlecode.com/svn/trunk/Common/AltScreens.fml Download FML]
 
-=== Текст ===
+=== Text===
 
 {{{
 macro 
