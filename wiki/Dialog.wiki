@@ -1,4 +1,6 @@
-#summary Макросы для диалогов
+#summary Dialog macros
+
+Please, translate
 
 Макросы, которые доступны в диалогах
 
