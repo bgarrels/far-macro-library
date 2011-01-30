@@ -1,28 +1,69 @@
-#summary Если есть подсветка - сбросить, иначе закрыть редактор (Esc)
+#summary Макросы для работы с плагином EditFind
 
  * [Editor Макросы для редактора]
 
 === Описание ===
 
-  При включенной постоянной подсветке в плагине [http://code.google.com/p/far-plugins/wiki/EdtFind EditFind]
-Esc будет сбрасывать подсветку или закрывать редактор, если подсветки нет.
+  Макросы для работы с плагином [http://code.google.com/p/far-plugins/wiki/EdtFind EditFind]
 
 === Текст ===
 
 {{{
-macro Description="EditorFind: сброс или Esc" Area="Editor" Key="Esc"
+Macro
+    Area="Editor"
+    Key="F7"
+    Description="EditorFind: Если есть выделение - 'Find word...', иначе 'Find...'"
+    DisableOutput=1
 {{
-  F11
-  $if (menu.select("Editor Find",2)<=0)
-    Esc Esc $Exit
+  BM.add()
+  %s=Selected; F11
+  $if (menu.Select("Editor Find",2)<=0)
+    MsgBox("Editor Find","Plugin was not found in list!",1) $Exit
   $end
   Enter
-  %s=menu.select("A ",1);
-  $if (%s==10)
-    A Editor.Sel(4)
+  $if (%s)
+    2
   $else
-    Esc Esc
+    1
   $end
 }}
 
+Macro
+    Area="Editor"
+    Key="CtrlF7"
+    Description="EditorFind: Если есть выделение - 'Replace word...', иначе 'Replace...'"
+    DisableOutput=1
+{{
+  BM.add()
+  %s=Selected; F11
+  $if (menu.Select("Editor Find",2)<=0)
+    MsgBox("Editor Find","Plugin was not found in list!",1) $Exit
+  $end
+  Enter
+  $if (%s)
+    4
+  $else
+    3
+  $end
+}}
+
+Macro
+    Area="Editor"
+    Key="ShiftF7 F3"
+    Description="EditorFind: Продолжить последнее действие (поиск/замена)"
+    DisableOutput=1
+{{
+  BM.add()
+  callplugin(0x444e4645,5)
+}}
+
+Macro
+    Area="Editor"
+    Key="AltShiftF7"
+    Description="EditorFind: Продолжить назад последнее действие (поиск/замена)"
+    DisableOutput=1
+{{
+  BM.add()
+  callplugin(0x444e4645,6)
+}}
 }}}
