@@ -7,3 +7,5 @@
  * [Shell_SelectEqual Выделить одинаковые файлы на обеих панелях] (c) John Doe 
 
  * [Shell_SelectByDate Выделить файлы/папки с датой как у текущего] (c) Fibre
+
+ * [Shell_SynchoMove Синхронное движение по обеим панелям] (c) Maximus5
