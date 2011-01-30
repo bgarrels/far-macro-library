@@ -1,0 +1,18 @@
+#summary Show explorer context menu (GUI) for selected drive
+
+=== Text ===
+{{{
+macro Descr="Show Explorer context menu for selected drive" Area="Disks" Key="Apps"
+{{
+  %ActiveDriveMenu=Drv.ShowPos;
+  %drv=substr(Menu.Value,0,2);
+  $if (substr(%drv,1,1) != ":" || substr(%drv,0,1) < "A" || substr(%drv,0,1) > "Z")
+    $Exit
+  $end
+  Esc Esc
+  print("rclk_gui:"+%drv)
+  Enter
+  $if (%ActiveDriveMenu == 1) AltF1 $else AltF2 $end
+  menu.Select(%drv,1,0)
+}}
+}}}

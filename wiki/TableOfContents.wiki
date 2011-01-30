@@ -3,3 +3,4 @@
   * [Shell Shell Macros]
   * [Editor Editor Macros]
   * [Dialog Dialog Macros]
+  * [Disks Disks Macros]
