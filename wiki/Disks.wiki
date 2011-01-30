@@ -1,5 +1,7 @@
 #summary Drives menu macros
 
-Macroses, available in the disks menu (AltF1/AltF2).
+Macroses, available in the disks menu (!AltF1/!AltF2).
 
  * [Disks_EMenu Show EMenu for selected drive]
+
+ * [Disks_SafeRemove Prepare drive for safe removal]
