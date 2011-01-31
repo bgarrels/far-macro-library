@@ -5,7 +5,3 @@
  * [Dialog_FileFind_OldStyle Макрос возвращающий поиску прежнее поведение] (c) John Doe
 
  * [Dialog_CheckHotkeys Макрос для проверки горячих клавиш в диалогах и меню] (с) DAtaMan
-
- * [Dialog_SizeManager Макрос для хождения по каталогам при открытом SizeManager]
-
- * [Dialog_VisualCompare Облегчение навигации в VisualCompare]
