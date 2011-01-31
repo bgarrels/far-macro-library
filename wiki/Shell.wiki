@@ -1,10 +1,8 @@
-#summary Shell macros
+﻿#summary Shell macros
 
 Please, translate
 
 Макросы доступные в контексте Shell
-
- * [Shell_EMenu Макросы для плагина EMenu]
 
  * [Shell_SelectEqual Выделить одинаковые файлы на обеих панелях] (c) John Doe 
 

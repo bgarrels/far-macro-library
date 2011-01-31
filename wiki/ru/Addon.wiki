@@ -2,7 +2,12 @@
 
 Макросы, предназначенные для работы совместно со сторонними плагинами
 
+ * [Shell_EMenu Макросы для плагина EMenu]
 
- * [Dialog_SizeManager Макрос для хождения по каталогам при открытом SizeManager]
+ * [Editor_EditFind Макросы для работы с плагином EditFind]
+
+ * [Editor_EditFindEsc Если есть подсветка - сбросить, иначе закрыть редактор (Esc)]
 
  * [Dialog_VisualCompare Облегчение навигации в VisualCompare]
+
+ * [Dialog_SizeManager Макрос для хождения по каталогам при открытом SizeManager]

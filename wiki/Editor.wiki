@@ -1,4 +1,4 @@
-#summary Editor macros
+﻿#summary Editor macros
 
 Please, translate
 
@@ -7,9 +7,5 @@ Please, translate
  * [Editor_CopyWord Копировать текущее слово]
 
  * [Editor_DeleteSpaces Макрос удаления конечных пробелов и табов] (с) SimSU
-
- * [Editor_EditFind Макросы для работы с плагином EditFind]
-
- * [Editor_EditFindEsc Если есть подсветка - сбросить, иначе закрыть редактор (Esc)]
 
  * [Editor_SaveAll Сохранить все окна редакторов, в которых есть изменения] (с) Maximus5
