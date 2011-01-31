@@ -8,25 +8,4 @@
 
 === Текст ===
 
-{{{
-macro Descr="EMenu: Key Activation" Area="Shell" Key="Apps:Release" 
-{{
-  F11 
-  $if (Menu.Select("EMenu") > 0) 
-    Enter c 1
-  $end
-}}
-
-macro Descr="EMenu: Mouse Activation" Area="Shell" Key="MSRClick" EatOnRun=0 
-{{
-  MSRClick
-}}
-
-macro Descr="EMenu: Mouse Activation" Area="Shell" Key="MSRClick:Release" EatOnRun=0 
-{{
-  F11 
-  $if (Menu.Select("EMenu") > 0) 
-    Enter c 1
-  $end
-}}
-}}}
+ * [http://far-macro-library.googlecode.com/svn/trunk/Shell/EMenu.fml Загрузить FML]

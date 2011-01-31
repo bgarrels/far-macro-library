@@ -11,15 +11,4 @@
 
 === Текст ===
 
-{{{
-macro Descr="Select same filenames on both panels" Area="Shell" Key="CtrlAltF12"
-{{
-  clip(5)
-  panel.select(0,1)
-  CtrlShiftIns
-  panel.select(1,1,2,clip(0))
-  Tab CtrlShiftIns Tab
-  panel.select(0,0)
-  panel.select(0,1,2,clip(0))
-}}
-}}}
+ * [http://far-macro-library.googlecode.com/svn/trunk/Shell/SelectEqual.fml Загрузить FML]
