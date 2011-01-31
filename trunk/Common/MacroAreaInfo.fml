@@ -1,4 +1,4 @@
-macro Descr="Current MacroArea/Dialog GUID information" Key="CtrlAltF12"
+﻿macro Descr="Current MacroArea/Dialog GUID information" Key="CtrlAltF12"
 {{
   %s = "MacroArea="+MacroArea+"\n"+"Title=«"+Title+"»";
   $if (Menu||MainMenu||UserMenu||Disks)
