@@ -1,4 +1,4 @@
-#summary Макросы для плагина EMenu
+﻿#summary Макросы для плагина EMenu
 
  * [Shell Макросы для панелей]
 
@@ -8,4 +8,4 @@
 
 === Текст ===
 
- * [http://far-macro-library.googlecode.com/svn/trunk/Shell/EMenu.fml Download FML]
+ * [http://far-macro-library.googlecode.com/svn/trunk/Shell/EMenu.fml Загрузить FML]
