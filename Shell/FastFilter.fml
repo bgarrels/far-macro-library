@@ -1,4 +1,3 @@
-
 const MacroLib = 0x424C434D
 const FilterName = "$FastFilter"
 

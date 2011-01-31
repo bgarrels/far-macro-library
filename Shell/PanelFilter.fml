@@ -1,15 +1,16 @@
-macro Descr = "Panel Filter: Unselect all filters" Key = "CtrlAltMultiply"
-Area = "Shell"
+macro Descr = "Panel Filter: Unselect all filters" 
+  Key = "CtrlAltMultiply"
+  Area = "Shell"
 {{
-CtrlI
-ShiftBS
-Enter
+  CtrlI
+  ShiftBS
+  Enter
 }}
 
 
 macro Descr = "Panel Filter: Filter files with same extentions as current or selected"
-Area = "Shell"
-Key="CtrlAltAdd CtrlAltSubtract CtrlAltI"
+  Area = "Shell"
+  Key="CtrlAltAdd CtrlAltSubtract CtrlAltI"
 {{
    $if(APanel.Folder)
       $exit
