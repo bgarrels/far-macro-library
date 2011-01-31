@@ -1,0 +1,10 @@
+macro Descr = "Copy word if nothing select" Area = "Editor" Key = "CtrlIns" Cond="Selected:0"
+{{
+  // Выделяем слово...
+  Right CtrlLeft CtrlShiftRight
+
+  ;;$SelWord
+
+  // И копируем
+  CtrlIns
+}}

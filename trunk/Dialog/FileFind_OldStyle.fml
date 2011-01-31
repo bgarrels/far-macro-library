@@ -1,0 +1,26 @@
+﻿const dlgFindFile = "{8C9EAD29-910F-4b24-A669-EDAFBA6ED964}"
+
+macro Descr = "FindFile: Возвращаем поиску прежнее поведение" Area="Dialog.dlgFindFile" Key="Enter"
+{{
+  $If ((Dlg.ItemType!=0x0000800A/*DLGITEMTYPE_HIST_COMBO*/) && (Dlg.ItemType!=7/*DLGITEMTYPE_BUTTON*/ || Dlg.GetValue(Dlg.CurPos,9/*DLGGETVALUE_IS_DEFAULT*/)))
+    $If (Dlg.CurPos>3)
+      %p=Dlg.CurPos;
+      Tab
+      $while(Dlg.CurPos>%p)
+        Tab
+      $End
+    $End
+    End
+    %txt=Dlg.GetValue(Dlg.CurPos,0 /*DLGGETVALUE_VALUE*/ );
+    $If (index(%txt,"/")!=0)
+      $If (index(%txt,".")<0 && index(%txt,"*")<0 && index(%txt,"?")<0)
+        print("*")
+      $End
+    $Else
+      $If (rindex(%txt,"/")==0)
+        print("/i")
+      $End
+    $End
+  $End
+  Enter
+}}
