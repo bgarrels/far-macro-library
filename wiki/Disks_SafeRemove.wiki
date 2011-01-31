@@ -4,12 +4,6 @@
 
  I'm lazy to select drive (in the Drive menu !AltF1/!AltF2) and depress !ShiftDel. So, depressing AltB (AltE) will prepare drive B: (E:) for safe removal.
 
-=== Text===
-{{{
-macro Descr="Safe remove drive B/E" Area="Disks" Key="AltB AltE"
-{{
-  %s = Key(#AKey);  
-  %c = substr(%s, len(%s) - 1, 1);
-  $if (checkhotkey(%c)) Menu.Select(%c+":",1) ShiftDel Enter $end
-}}
-}}}
+=== Text ===
+
+ * [http://far-macro-library.googlecode.com/svn/trunk/Disks/SafeRemove.fml Download FML]

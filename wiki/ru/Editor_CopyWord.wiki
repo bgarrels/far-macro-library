@@ -1,4 +1,4 @@
-#summary Копировать текущее слово
+﻿#summary Копировать текущее слово
 
  * [Editor Макросы для редактора]
 
@@ -8,15 +8,4 @@
 
 === Текст ===
 
-{{{
-macro Descr = "Copy word if nothing select" Area = "Editor" Key = "CtrlIns" Cond="Selected:0"
-{{
-  // Выделяем слово...
-  Right CtrlLeft CtrlShiftRight
-
-  ;;$SelWord
-
-  // И копируем
-  CtrlIns
-}}
-}}}
+ * [http://far-macro-library.googlecode.com/svn/trunk/Editor/CopyWord.fml Загрузить FML]
