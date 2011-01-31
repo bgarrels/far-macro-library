@@ -1,4 +1,4 @@
-#summary Если есть подсветка - сбросить, иначе закрыть редактор (Esc)
+﻿#summary Если есть подсветка - сбросить, иначе закрыть редактор (Esc)
 
  * [Editor Макросы для редактора]
 
@@ -6,22 +6,6 @@
 
   При включенной постоянной подсветке в плагине [http://code.google.com/p/far-plugins/wiki/EdtFind EditFind] Esc будет сбрасывать подсветку или закрывать редактор, если подсветки нет.
 
-=== Текст ===
+=== Text ===
 
-{{{
-macro Description="EditorFind: сброс или Esc" Area="Editor" Key="Esc"
-{{
-  F11
-  $if (menu.select("Editor Find",2)<=0)
-    Esc Esc $Exit
-  $end
-  Enter
-  %s=menu.select("A ",1);
-  $if (%s==10)
-    A Editor.Sel(4)
-  $else
-    Esc Esc
-  $end
-}}
-
-}}}
+ * [http://far-macro-library.googlecode.com/svn/trunk/Addon/EdtFindEsc.fml Download FML]

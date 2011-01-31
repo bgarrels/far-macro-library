@@ -8,4 +8,4 @@
 
 === Текст ===
 
- * [http://far-macro-library.googlecode.com/svn/trunk/Shell/EMenu.fml Загрузить FML]
+ * [http://far-macro-library.googlecode.com/svn/trunk/Addon/EMenu.fml Загрузить FML]

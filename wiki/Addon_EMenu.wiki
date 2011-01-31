@@ -6,6 +6,6 @@
 
  Макросы вызывают плагин EMenu по нажатию правой кнопки мыши или клавиши Apps. Является полнофункциональной заменой плагина rcl2app. Для использования макроса плагин rcl2app нужно удалить - они конфликтуют.
 
-=== Текст ===
+=== Text ===
 
- * [http://far-macro-library.googlecode.com/svn/trunk/Shell/EMenu.fml Download FML]
+ * [http://far-macro-library.googlecode.com/svn/trunk/Addon/EMenu.fml Download FML]
