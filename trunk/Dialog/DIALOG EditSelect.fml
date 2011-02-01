@@ -1,0 +1,12 @@
+;; Макрос осуществляющий выделение в полях ввода диалогов. (с)SimSU, (i)Max Rusov
+macro
+  Descr="Выделение при попадание в поле ввода. (c) SimSU"
+  Bind="AltA AltB AltC AltD AltE AltF AltG AltH AltI AltJ AltK AltL AltM AltN AltO AltP AltQ AltR AltS AltT AltU AltV AltW AltX AltY AltZ"
+  Bind="Alt1 Alt2 Alt3 Alt4 Alt5 Alt6 Alt7 Alt8 Alt9 Alt0"
+  Key="Tab ShiftTab"
+  Area="Dialog"
+  EatOnRun=0
+  Event="Open"
+{{
+  $IF ((Dlg.Itemtype>=4)&&(Dlg.Itemtype<=6)) Home ShiftEnd $END
+}}
