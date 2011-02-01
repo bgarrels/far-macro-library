@@ -1,0 +1,30 @@
+;;"Макрос удаления конечных пробелов и табов и конечных пустых строк в редакторе. (с) SimSU";
+macro
+  Name="SimSU_trim"
+  Descr="Editor: Удаление лишнего пространства. (c) SimSU"
+  Key="AltDel AltNumDel"
+  Area="Editor"
+{{
+  $IF(msgbox("SimSU trim","Удалить пробелы из окончаний строк\nи пустые строки из конца файла?",262144)==1)
+    //===Сохранение положения===
+    editor.undo(0) %bm=bm.add();
+    //===Удаление пробелов===
+    //Настраиваем стандартную замену.
+    CtrlHome CtrlF7 CtrlY print("( |\\t)+$") Tab CtrlY Tab Tab
+    Tab %Rev=dlg.getvalue(dlg.getvalue(0,6),0); Subtract //Отключаем режим "Обратный поиск".
+    Tab %Reg=dlg.getvalue(dlg.getvalue(0,6),0); Add //Устанавливаем режим "Регулярные выражения".
+    //Заменяем.
+    Enter Tab Enter
+    //Восстанавливаем состояние замены.
+    CtrlF7 CtrlDown $IF (ItemCount>1) ShiftDel Esc $Else ShiftDel $End //Чистим историю.
+    Tab Tab Tab
+    Tab $IF (%Rev) Add $ELSE Subtract $END//Восстанавливаем режим "Обратный поиск".
+    Tab $IF (%Reg) Add $ELSE Subtract $END//Восстанавливаем режим "Регулярные выражения".
+    Esc
+    //==Удаление строк===
+    CtrlEnd $WHILE ((Editor.Value=="")&&(editor.curline!=1)) ShiftUp $END ShiftDown Del
+    //===Восстановление положения===
+    bm.next() bm.del(%bm) editor.undo(1)
+  $END
+}}
+;; http://code.google.com/p/simsufar/
