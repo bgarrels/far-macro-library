@@ -10,3 +10,4 @@ macro
 {{
   $IF ((Dlg.Itemtype>=4)&&(Dlg.Itemtype<=6)) Home ShiftEnd $END
 }}
+;; http://code.google.com/p/simsufar/
