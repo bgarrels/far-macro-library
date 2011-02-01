@@ -11,4 +11,4 @@
 
 === Текст ===
 
- * [http://far-macro-library.googlecode.com/svn/trunk/Editor/DeleteSpaces.fml Загрузить FML...]
+ * [http://far-macro-library.googlecode.com/svn/trunk/Editor/DeleteSpaces.fml Загрузить FML]
