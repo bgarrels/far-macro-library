@@ -1,15 +1,13 @@
-﻿#summary Макросы для плагинов
+﻿#summary Macroses for plugins.
 
-Please, translate
+This macroses are intended for work with foreign plugins.
 
-Макросы, предназначенные для работы совместно со сторонними плагинами
+ * [Addon_EMenu Macroses for EMenu plugin]
 
- * [Addon_EMenu Макросы для плагина EMenu]
+ * [Addon_EditFind Macroses for EditFind plugin]
 
- * [Addon_EditFind Макросы для работы с плагином EditFind]
+ * [Addon_EditFindEsc If remove highlight of EditFind Plugin, close editor (Esc) otherwise]
 
- * [Addon_EditFindEsc Если есть подсветка - сбросить, иначе закрыть редактор (Esc)]
+ * [Addon_VisualCompare VisualCompare tricks]
 
- * [Addon_VisualCompare Облегчение навигации в VisualCompare]
-
- * [Addon_SizeManager Макрос для хождения по каталогам при открытом SizeManager]
+ * [Addon_SizeManager Macro is allow to walking through the directories if SizeManager plugin is open]
