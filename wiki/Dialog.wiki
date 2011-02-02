@@ -1,4 +1,4 @@
-﻿#summary Dialog macros
+ #summary Dialog macros
 
 Please, translate
 
@@ -9,3 +9,4 @@ Please, translate
  * [Dialog_CheckHotkeys Макрос для проверки горячих клавиш в диалогах и меню] (с) DAtaMan
 
  * [Dialog_EditSelect Макрос выделяющий текст в строках ввода FAR аналогично Windows] (с) SimSU
+ 
