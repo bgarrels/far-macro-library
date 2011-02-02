@@ -11,4 +11,4 @@
 
 === Text ===
 
- * [http://far-macro-library.googlecode.com/svn/trunk/Editor/EDITOR Trim.fml Download FML]
+ * [http://far-macro-library.googlecode.com/svn/trunk/Editor/EDITOR%20Trim.fml Download FML]
