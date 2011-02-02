@@ -2,7 +2,7 @@
 
 Please, translate
 
-Макросы доступные в контексте Shell
+Macroses, available in the Shell context (panels)
 
  * [Shell_SelectEqual Выделить одинаковые файлы на обеих панелях] (c) John Doe 
 
@@ -13,3 +13,5 @@ Please, translate
  * [Shell_OpenPassive Открыть на левой панели папку под курсором правой панели и наоборот] (c) Maximus5
 
  * [Shell_FastFilter Быстрая фильтрация в панелях] (c) Max Rusov
+
+ * [Shell_ResizeFirstColumn Smooth resize of the first panel column] (с) Maximus5

@@ -1,0 +1,70 @@
+﻿
+macro Area="Shell" Key="CtrlAltLeft CtrlAltRight CtrlAltClear"
+{{
+  // Minimal column width
+  %minwidth = 8; 
+
+  %key = Key(#AKey);
+  $if (substr(%key, len(%key) - 4, 4)=="Left")
+    %dir = -1;
+  $else $if (substr(%key, len(%key) - 5, 5)=="Right")
+    %dir = 1;
+  $else
+    %dir = 0;
+  $end $end
+
+  // Open modes menu
+  $if (Env("FARLANG") == "English")
+    F9 o m
+  $else $if (Env("FARLANG") == "Russian")
+    F9 р ы
+  $else
+    $AKey $Exit
+  $end $end
+
+  Enter // Enter dialog
+
+  $if (Dlg.ItemCount!=19 || dlg.getvalue(3,1)!=4 || dlg.getvalue(5,1)!=4)
+    MsgBox("Macro","Invalid number of items in the «mode» dialog!",1)
+    $Exit
+  $end
+
+  //Column types:  Dlg.ItemCount=19; .CurPos=3; .ItemType=4; Value=«N,C0»
+  //Column widths: Dlg.ItemCount=19; .CurPos=5; .ItemType=4; Value=«25,0»
+  //%types = dlg.getvalue(3,0);
+  %width = dlg.getvalue(5,0);
+  
+  %i = index(%width,",");
+  // Two columns at least!
+  $if (%i>0)
+    $if (%%NColumnSizerSet!=1)
+      // Запомнить начальную ширину, чтобы можно было восстановить по CtrlAltClear
+      %%NColumnSizerSet=1; %%NColumnSizerWidth=substr(%width,0,%i);
+    $end
+    $if (%dir==0)
+      $if (%%NColumnSizerSet==1)
+        %width = %%NColumnSizerWidth+substr(%width,%i);
+        %%NColumnSizerSet = 0;
+      $end
+    $else
+      // May be percents?
+      $if (substr(%width,%i-1,1)=="%") %i=%i-1; $end
+      // Processing width
+      %len = atoi(substr(%width,0,%i),10);
+      //msgbox("",%len)
+      $if (%dir>0)
+        %len1=iif((%len<%minwidth),%minwidth,%len+1);
+      $else $if (%dir<0)
+        %len1=iif((%len>%minwidth),%len-1,%minwidth);
+      $end $end
+      %width = itoa(%len1,10)+substr(%width,%i);
+    $end
+    
+    $while (Dlg.CurPos!=5) Tab $end
+    Home ShiftEnd print(%width) Enter Esc
+    $Exit
+  $end
+
+  // If we come here, nothing was changed
+  Esc Esc
+}}

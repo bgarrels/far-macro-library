@@ -1,0 +1,18 @@
+#summary Smooth resize of the first panel column (с) Maximus5
+
+ * [Shell Shell Macros]
+
+=== Description ===
+
+  Smooth resize of the first panel column (this is the file name, usually).
+
+  # *Ctrl+Alt+Left* -  Narrowing column width
+  # *Ctrl+Alt+Right* — Widening column width
+  # *Ctrl+Alt+Clear* — Reset column to the original width
+
+ Attention: This macros requires english or russian Far interface language.
+
+
+=== Text ===
+
+ * [http://far-macro-library.googlecode.com/svn/trunk/Shell/ResizeFirstColumn.fml Download FML]
