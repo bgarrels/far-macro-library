@@ -5,3 +5,4 @@
 === Text ===
 
  * [http://far-macro-library.googlecode.com/svn/trunk/Shell/OpenPassive.fml Download FML]
+ * [http://far-macro-library.googlecode.com/svn/trunk/Shell/OpenPassive%20(c)SimSU.fml Download FML from SimSU]
