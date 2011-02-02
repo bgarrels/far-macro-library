@@ -6,7 +6,7 @@ This macroses are intended for work with foreign plugins.
 
  * [Addon_EditFind Macroses for EditFind plugin]
 
- * [Addon_EditFindEsc If remove highlight of EditFind Plugin, close editor (Esc) otherwise]
+ * [Addon_EditFindEsc  Remove highlight of EditFind Plugin if set, close editor (Esc) otherwise]
 
  * [Addon_VisualCompare VisualCompare tricks]
 
