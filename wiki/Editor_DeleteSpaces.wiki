@@ -5,10 +5,7 @@
 === Описание ===
 
   Макрос удаления пробелов и табов из окончаний строк, а также пустых строк из конца редактируемого файла с сохранением/восстановлением состояния поиска по регэкспам.
-
-  Источник:<br>
-  http://forum.farmanager.com/viewtopic.php?f=15&t=5518&start=0
-
+ 
 === Text ===
 
  * [http://far-macro-library.googlecode.com/svn/trunk/Editor/EDITOR%20Trim.fml Download FML]
