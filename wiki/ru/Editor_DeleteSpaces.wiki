@@ -1,4 +1,4 @@
-﻿#summary Макрос удаления конечных пробелов и табов? (с) SimSU
+#summary Макрос удаления конечных пробелов и табов (с) SimSU
 
  * [Editor Макросы для редактора]
 
@@ -11,4 +11,4 @@
 
 === Текст ===
 
- * [http://far-macro-library.googlecode.com/svn/trunk/Editor/DeleteSpaces.fml Загрузить FML]
+ * [http://far-macro-library.googlecode.com/svn/trunk/Editor/EDITOR%20Trim.fml Загрузить FML]
