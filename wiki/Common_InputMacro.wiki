@@ -1,7 +1,7 @@
 #summary Ручной ввод и исполнение макроса в любом контексте
 #sidebar TableOfContents
 
- * [Common]
+ * [Common Common macros]
 
 === Текст ===
 
