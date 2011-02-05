@@ -13,3 +13,9 @@
 === Текст ===
 
  * [http://far-macro-library.googlecode.com/svn/trunk/Addon/SizeManager.fml Загрузить FML]
+
+=== Изменения ===
+==== 110205 ====
+ * требуется "SizeManager 1.1.152.534" или выше
+ * переведен на GUID
+ * работают RCtrlPgUp, RCtrlPgDn и Tab

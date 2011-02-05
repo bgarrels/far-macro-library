@@ -13,3 +13,9 @@
 === Text ===
 
  * [http://far-macro-library.googlecode.com/svn/trunk/Addon/SizeManager.fml Download FML]
+
+=== Changes ===
+==== 110205 ====
+ * "SizeManager 1.1.152.534" or higer required
+ * using dialog GUID's
+ * RCtrlPgUp, RCtrlPgDn and Tab works
