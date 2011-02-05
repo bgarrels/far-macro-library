@@ -19,3 +19,10 @@
 === Текст ===
 
  * [http://far-macro-library.googlecode.com/svn/trunk/Shell/FastFilter.fml Download FML]
+ * [http://far-macro-library.googlecode.com/svn/trunk/Shell/FastFilter.v2.fml Download FML v2]
+
+=== Изменения ===
+==== 110204 Maximus5 ====
+ * одновременно фильтруется по двум языкам через xlat
+ * курсор сдвигается не первый найденный элемент, если до фильтрации был на ".."
+ * запоминается (и восстанавливается) режим 'Toggle folder filter'

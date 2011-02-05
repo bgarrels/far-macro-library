@@ -1,0 +1,254 @@
+﻿
+// 110204 Maximus5 - одновременно фильтруется по двум языкам через xlat
+//                 - курсор сдвигается не первый найденный элемент, если до фильтрации был на ".."
+//                 - запоминается (и восстанавливается) режим 'Toggle folder filter'
+
+const MacroLib = 0x424C434D
+const FilterName = "$FastFilter"
+
+macro
+  Name="FastFilterClear"
+  Descr="Fast filter: Clear Filter"
+  //Bind="RAlt"
+  Bind="RAltBS"
+  Area="Shell"
+{{
+  F9 c i
+
+  $if (menu.select(#%FilterName, 1) > 0)
+    DEL Enter
+    Enter
+  $else
+    Esc
+  $end
+}}
+
+
+macro
+  Descr="Fast filter: Add symbol"
+  Bind="RAltA RAltB RAltC RAltD RAltE RAltF RAltG RAltH RAltI RAltJ RAltK RAltL RAltM RAltN RAltO RAltP RAltQ RAltR RAltS RAltT RAltU RAltV RAltW RAltX RAltY RAltZ"
+  Bind="RAlt1 RAlt2 RAlt3 RAlt4 RAlt5 RAlt6 RAlt7 RAlt8 RAlt9 RAlt0"
+  Bind="RAlt."
+  Area="Shell"
+{{
+  %s = substr(Key(#AKey), 4, 1);
+
+  F9 c i
+
+  $if (menu.select(#%FilterName, 1) == 0)
+    Ins
+    print(#%FilterName)
+
+    Tab Tab
+
+    %%FastFilterMask = %s;
+    %sx = xlat(%s);
+    $if (%s!=%sx) %s = %s + "*,*" + %sx; $end
+    print("*" + %s + "*")
+
+    $if (%%FastFilterDir == 1)
+      // Фильтруем каталоги тоже
+      AltD Multiply
+    $end
+
+    Enter
+
+    %%FastFilterExc = 0;   // Не запоминаем 
+
+    $if (%%FastFilterExc) 
+      Subtract
+    $else
+      Add
+    $end
+
+    Enter
+
+  $else
+    F4 
+    Tab Tab 
+
+    %%FastFilterMask = %%FastFilterMask + %s;
+    %sx = xlat(%%FastFilterMask);
+    $if (%%FastFilterMask!=%sx) %s = %%FastFilterMask + "*,*" + %sx; $else %s = %%FastFilterMask; $end
+    print("*" + %s + "*")
+  
+    Enter
+    Enter
+  $end
+
+  $if (Shell && !APanel.Empty && APanel.Bof && APanel.Current == "..")
+    $if (%%FastFilterDir == 1)
+      // Фильтруем каталоги тоже
+      Down
+    $else
+      // Перейти к первому файлу на панели
+      %n = 1; $while (%n <= APanel.ItemCount) $if ((panelitem(0,%n,2) & 0x10) == 0) panel.setposidx(0,%n) %n = APanel.ItemCount + 1; $else %n = %n + 1; $end $end
+    $end
+  $end
+}}
+
+
+
+macro
+  Descr="Fast filter: Delete symbol"
+  //Bind="RAltBS"
+  Area="Shell"
+{{
+  F9 c i
+
+  $if (menu.select(#%FilterName, 1) > 0)
+    F4
+    Tab Tab
+
+    %%FastFilterMask = substr(%%FastFilterMask,0,-1);
+    %sx = xlat(%%FastFilterMask);
+    $if (%%FastFilterMask!=%sx) %s = %%FastFilterMask + "*,*" + %sx; $else %s = %%FastFilterMask; $end
+    print("*" + %s + "*")
+  
+    Enter
+    Enter
+  $else
+    Esc
+  $end
+}}
+
+
+macro
+  Name="FastFilterPrompt"
+  Descr="Fast filter: Input filter"
+  Bind="RAlt/"
+  Area="Shell"
+{{
+  F9 c i
+
+  $if (menu.select(#%FilterName, 1) > 0)
+    F4
+    Tab Tab
+
+    %Filter = dlg.getvalue(dlg.CurPos, 0);
+
+    %L = len(%Filter);
+    $if ((%L > 2) && (substr(%Filter, 0, 1) == "*") && (substr(%Filter, %L - 1, 1) == "*"))
+      %Filter = substr(%Filter, 1, %L - 2);
+    $end
+
+    Esc
+    Esc
+
+  $else
+    Esc
+  $end
+
+  // Спрашиваем фильтр
+  %Filter = prompt("Fast filter", "Input Filter:", 8, %Filter, "FastFilter.Text");
+
+  $if (%Filter != "") 
+    F9 c i
+    $if (menu.select(#%FilterName, 1) == 0)
+      Ins
+      print(#%FilterName)
+
+      Tab Tab
+
+      print("*" + %Filter + "*")
+
+      $if (%%FastFilterDir == 1)
+        // Фильтруем каталоги тоже
+        AltD Multiply
+      $end
+
+      Enter
+
+      %%FastFilterExc = 0;   // Не запоминаем 
+
+      $if (%%FastFilterExc) 
+        Subtract
+      $else
+        Add
+      $end
+
+      Enter
+
+    $else
+      F4 
+      Tab Tab 
+
+      print("*" + %Filter + "*")
+    
+      Enter
+      Enter
+    $end
+
+  $else
+    F9 c i
+    $if (menu.select(#%FilterName, 1) > 0)
+      DEL Enter
+      Enter
+    $else
+      Esc
+    $end
+  $end
+}}
+
+
+macro
+  Name="FastFilterInclusive"
+  Descr="Fast filter: Inclusive/Exclisive filter"
+  Bind="RAlt-"
+  Area="Shell"
+{{
+  %%FastFilterExc = iif(%%FastFilterExc == 0, 1, 0);
+
+  F9 c i
+  $if (menu.select(#%FilterName, 1) > 0)
+
+    BS
+    menu.select(#%FilterName, 1)
+
+    $if (%%FastFilterExc) 
+      Subtract
+    $else
+      Add
+    $end
+
+    Enter
+
+  $else
+    Esc
+  $end
+}}
+
+
+macro
+  Name="FastFilterToggleFolder"
+  Descr="Fast filter: Toggle folder filter"
+  Bind="RAlt\"
+  Area="Shell"
+{{
+  %%FastFilterDir = iif(%%FastFilterDir == 0, 1, 0);
+  msave("%%FastFilterDir")
+
+  F9 c i
+  $if (menu.select(#%FilterName, 1) > 0)
+    F4
+
+    AltD
+
+    $if (%%FastFilterDir) 
+      Multiply
+    $else
+      Subtract
+    $end
+
+    Enter
+    Enter
+
+    $if (%%FastFilterDir != 1 && (panel.fattr(0,APanel.Current)&0x10))
+      // Перейти к первому файлу на панели
+      %n = 1; $while (%n <= APanel.ItemCount) $if ((panelitem(0,%n,2) & 0x10) == 0) panel.setposidx(0,%n) %n = APanel.ItemCount + 1; $else %n = %n + 1; $end $end
+    $end
+
+  $else
+    Esc
+  $end
+}}
