@@ -16,11 +16,11 @@ macro
     //Заменяем.
     Enter Tab Enter
     //Восстанавливаем состояние замены.
-    CtrlF7 CtrlDown $IF (ItemCount>1) ShiftDel Esc $Else ShiftDel $End //Чистим историю.
+    CtrlF7 CtrlY CtrlDown $IF (ItemCount>1) ShiftDel Esc $Else ShiftDel $End //Чистим историю.
     Tab Tab Tab
     Tab $IF (%Rev) Add $ELSE Subtract $END//Восстанавливаем режим "Обратный поиск".
     Tab $IF (%Reg) Add $ELSE Subtract $END//Восстанавливаем режим "Регулярные выражения".
-    Esc
+    Enter
     //==Удаление строк===
     CtrlEnd $WHILE ((Editor.Value=="")&&(editor.curline!=1)) ShiftUp $END ShiftDown Del
     //===Восстановление положения===
