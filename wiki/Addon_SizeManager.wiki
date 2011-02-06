@@ -16,6 +16,6 @@
 
 === Changes ===
 ==== 110205 ====
- * "SizeManager 1.1.152.534" or higer required
+ * "!SizeManager 1.1.152.534" or higer required
  * using dialog GUID's
  * RCtrlPgUp, RCtrlPgDn and Tab works
