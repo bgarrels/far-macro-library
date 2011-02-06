@@ -1,4 +1,5 @@
 ﻿#summary Macro remove trailing spaces and tabs (с) SimSU
+(please correct my English description)
 
  * [Editor Macro from Editor]
 
