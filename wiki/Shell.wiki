@@ -15,3 +15,5 @@ Macroses, available in the Shell context (panels)
  * [Shell_FastFilter Быстрая фильтрация в панелях] (c) Max Rusov
 
  * [Shell_ResizeFirstColumn Smooth resize of the first panel column] (с) Maximus5
+
+ * [Shell_CtrlDisk Переключение дисков по Ctrl+Стрелки] (с) Max Rusov
