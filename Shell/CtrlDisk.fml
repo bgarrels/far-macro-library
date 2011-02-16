@@ -1,0 +1,52 @@
+;;
+;; Переключение дисков по Ctrl+Стрелки (c) Max Rusov
+;;
+;; При нажатии LeftCtrl переключаются диски на левой панели, по нажатию RightCtrl - на правой. 
+;;
+;;  Макрос является функциональным аналогом плагина CtrlDisk:
+;;  http://plugring.farmanager.com/plugin.php?pid=20&l=en 
+;;
+;;  Для работы плагина требуется MacroLib? v9+ 
+;;
+
+macro Descr="Переключение дисков по Ctrl+Стрелки" Area="Shell" Key="CtrlLeft:Down CtrlRight:Down RCtrlLeft:Down RCtrlRight:Down" Cond="CmdLine:0"
+{{
+  %Key = Key(#AKey);
+
+  $if (substr(%Key,0,1) == "R")
+    AltF2
+  $else
+    AltF1
+  $end
+
+//Home
+
+  Ctrl7
+  $if (substr(%Key,-4) == "Left")
+    Up
+  $else
+    Down
+  $end
+  Ctrl7
+}}
+
+
+macro Descr="Переключение дисков по Ctrl+Стрелки" Area="Disks" Key="CtrlLeft CtrlRight RCtrlLeft RCtrlRight"
+{{
+  %Key = Key(#AKey);
+
+  Ctrl7
+  $if (substr(%Key,-4) == "Left")
+    Up
+  $else
+    Down
+  $end
+  Ctrl7
+}}
+
+
+macro Descr="Переключение дисков по Ctrl+Стрелки" Area="Disks" Key="Ctrl:Up"
+{{
+  Enter
+}}
+
