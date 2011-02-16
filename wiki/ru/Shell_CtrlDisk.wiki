@@ -2,15 +2,15 @@
 
  * [Shell Shell Macros]
 
-=== Description ===
+=== Описание ===
 
   Переключение дисков по нажатию Ctrl-Left/Ctrl-Right. При нажатии LeftCtrl переключаются диски на левой панели, по нажатию RightCtrl - на правой.
 
   Макрос является функциональным аналогом плагина CtrlDisk:<br>
-  http://plugring.farmanager.com/plugin.php?pid=20&l=en
+  http://plugring.farmanager.com/plugin.php?pid=20&l=ru
 
   Для работы плагина требуется MacroLib v9+
 
-=== Text ===
+=== Текст ===
 
  * [http://far-macro-library.googlecode.com/svn/trunk/Shell/CtrlDisk.fml Download FML]

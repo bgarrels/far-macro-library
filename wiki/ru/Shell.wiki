@@ -13,3 +13,5 @@
  * [Shell_FastFilter Быстрая фильтрация в панелях] (c) Max Rusov
 
  * [Shell_ResizeFirstColumn Ресайз первой колонки панели] (с) Maximus5
+
+ * [Shell_CtrlDisk Переключение дисков по Ctrl+Стрелки] (с) Max Rusov
