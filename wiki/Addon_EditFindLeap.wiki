@@ -7,11 +7,11 @@
   Leap search for [http://code.google.com/p/far-plugins/wiki/EdtFind EditFind] plugin
   Search with two languages simultaneously via xlat and regexp.
 
-  How to use:
+==== How to use ====
   * depress RAlt and type search text
   * release RAlt for clear search buffer
 
-  Todo:
+==== Todo ====
   * some russian letters are skipped
   * english Far interface language expected
 
