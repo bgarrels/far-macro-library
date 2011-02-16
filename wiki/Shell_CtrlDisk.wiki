@@ -4,7 +4,7 @@
 
 === Описание ===
 
-  Переключение дисков по нажатию Ctrl-Left/Ctrl-Right. При нажатии Left Ctrl переключаются диски на левой панели, по нажатию Right Ctrl - на правой.
+  Переключение дисков по нажатию Ctrl-Left/Ctrl-Right. При нажатии LeftCtrl переключаются диски на левой панели, по нажатию RightCtrl - на правой.
 
   Макрос является функциональным аналогом плагина CtrlDisk:<br>
   http://plugring.farmanager.com/plugin.php?pid=20&l=en
