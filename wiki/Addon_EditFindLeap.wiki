@@ -1,0 +1,20 @@
+﻿#summary Leap for EditFind plugin
+
+ * [Addon Macroses for plugins]
+
+=== Description ===
+
+  Leap search for [http://code.google.com/p/far-plugins/wiki/EdtFind EditFind] plugin
+  Search with two languages simultaneously via xlat and regexp.
+
+  How to use:
+  * depress RAlt and type search text
+  * release RAlt for clear search buffer
+
+  Todo:
+  * some russian letters are skipped
+  * english Far interface language expected
+
+=== Text ===
+
+ * [http://far-macro-library.googlecode.com/svn/trunk/Addon/EdtFind.fml Download FML]

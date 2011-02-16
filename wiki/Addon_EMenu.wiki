@@ -1,10 +1,10 @@
-﻿#summary Макросы для плагина EMenu
+﻿#summary Macroses for EMenu plugin
 
- * [Addon Макросы для плагинов]
+ * [Addon Macroses for plugins]
 
-=== Описание ===
+=== Description ===
 
- Макросы вызывают плагин EMenu по нажатию правой кнопки мыши или клавиши Apps. Является полнофункциональной заменой плагина rcl2app. Для использования макроса плагин rcl2app нужно удалить - они конфликтуют.
+ These macroses calls EMenu plugin via Right mouse button or Apps key. This is equivalent of rcl2app plugin. You must delete rcl2app plugin to avoid conflicts.
 
 === Text ===
 

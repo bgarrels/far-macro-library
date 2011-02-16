@@ -1,13 +1,13 @@
-﻿#summary Макрос для хождения по каталогам при открытом плагине SizeManager
+﻿#summary Macro is allow to walking through the directories if SizeManager plugin is open
 
- * [Addon Макросы для плагинов]
+ * [Addon Macroses for plugins]
 
-=== Описание ===
+=== Description ===
 
- Плагин берем здесь<br>
+ Download plugin here<br>
  http://code.google.com/p/size-manager/downloads/list
 
- Источник<br>
+ Macro origin<br>
  http://forum.farmanager.com/viewtopic.php?p=75992#p75992
 
 === Text ===

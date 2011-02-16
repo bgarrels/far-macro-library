@@ -1,10 +1,10 @@
-﻿#summary Если есть подсветка - сбросить, иначе закрыть редактор (Esc)
+﻿#summary Remove highlight of EditFind Plugin if set, close editor (Esc) otherwise
 
- * [Addon Макросы для плагинов]
+ * [Addon Macroses for plugins]
 
-=== Описание ===
+=== Description ===
 
-  При включенной постоянной подсветке в плагине [http://code.google.com/p/far-plugins/wiki/EdtFind EditFind] Esc будет сбрасывать подсветку или закрывать редактор, если подсветки нет.
+  When «Persistent Matches» is On in the [http://code.google.com/p/far-plugins/wiki/EdtFind EditFind] plugin, Esc will reset markups (if any exists) or close editor (if no markups).
 
 === Text ===
 

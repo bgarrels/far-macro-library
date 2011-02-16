@@ -6,6 +6,8 @@
 
  * [Addon_EditFind Макросы для работы с плагином EditFind]
 
+ * [Addon_EditFindLeap Leap для плагина EditFind]
+
  * [Addon_EditFindEsc Если есть подсветка - сбросить, иначе закрыть редактор (Esc)]
 
  * [Addon_VisualCompare Облегчение навигации в VisualCompare]

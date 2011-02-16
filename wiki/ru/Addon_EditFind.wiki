@@ -4,7 +4,7 @@
 
 === Описание ===
 
-  Макросы для работы с плагином [http://code.google.com/p/far-plugins/wiki/EdtFind EditFind]
+  Макросы для работы с плагином [http://code.google.com/p/far-plugins/wiki/EdtFind EditFind]: F7, CtrlF7, ShiftF7, F3, AltShiftF7.
 
 === Текст ===
 

@@ -1,10 +1,10 @@
-﻿#summary Макросы для работы с плагином EditFind
+﻿#summary Macroses for EditFind plugin
 
- * [Addon Макросы для плагинов]
+ * [Addon Macroses for plugins]
 
-=== Описание ===
+=== Description ===
 
-  Макросы для работы с плагином [http://code.google.com/p/far-plugins/wiki/EdtFind EditFind]
+  Macroses for [http://code.google.com/p/far-plugins/wiki/EdtFind EditFind] plugin: F7, CtrlF7, ShiftF7, F3, AltShiftF7.
 
 === Text ===
 

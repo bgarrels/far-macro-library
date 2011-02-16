@@ -1,16 +1,16 @@
-﻿#summary Облегчение навигации в VisualCompare
+﻿#summary VisualCompare tricks
 
- * [Addon Макросы для плагинов]
+ * [Addon Macroses for plugins]
 
-=== Описание ===
+=== Description ===
 
- При открытом диалоге сравнения содержимого файлов (плагин VisualCompare)
- * Gray+/Gray- переходит к следующему/предыдущему файлу
- * !AltLeft/!AltRight сдвигает текст на 8 символов влево/вправо
- * Home/End на 80 символов влево/вправо
- * !CtrlHome/!CtrlEnd в начало/конец файла
+ While VisualCompare dialog (file list) is open
+ * Gray+/Gray- jump to next/previous file
+ * !AltLeft/!AltRight 80 characters leftward/rightward
+ * Home/End scroll 80 characters leftward/rightward
+ * !CtrlHome/!CtrlEnd jump to file begin/end
 
- Плагин берем здесь<br>
+ Download plugin here<br>
  http://code.google.com/p/far-plugins/wiki/VisualCompare
 
 === Text ===
