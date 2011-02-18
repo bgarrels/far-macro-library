@@ -1,0 +1,125 @@
+;; Макросы для быстрого поиска в редакторе. (с) SimSU (i) Maximus5 - EditFindLeap
+;; Поиск ведется с учетом текущего языка (если текущая раскладка не английская то используем xlat).
+;; Использование: зажав Правый Контрол (RCtrl) набираем текст - получаем быстрое позиционирование,
+;; не отпуская Правый Контрол (RCtrl), нажав BackSpace отменим последний введенный символ,
+;; не отпуская Правый Контрол (RCtrl), нажав Enter спозиционируемся на следующее вхождение.
+;; Поиск прекращается при отпускании Правого Контрола (RCtrl).  ЁЁЁ
+
+const MacroLib = 0x424C434D
+
+macro
+  Name="SimSU_IncSearch"
+  Descr="Editor: Быстрый поиск. (с) SimSU"
+  Key="RCtrl1 RCtrl2 RCtrl3 RCtrl4 RCtrl5 RCtrl6 RCtrl7 RCtrl8 RCtrl9 RCtrl0"
+  Key="RCtrlQ RCtrlW RCtrlE RCtrlR RCtrlT RCtrlY RCtrlU RCtrlI RCtrlO RCtrlP RCtrl[ RCtrl]"
+  Key="RCtrlA RCtrlS RCtrlD RCtrlF RCtrlG RCtrlH RCtrlJ RCtrlK RCtrlL RCtrl; RCtrl'"
+  Key="RCtrlZ RCtrlX RCtrlC RCtrlV RCtrlB RCtrlN RCtrlM RCtrl, RCtrl."
+  Key="RCtrlSpace RCtrl= RCtrlShift= RCtrl- RCtrlShift- RCtrl` RCtrlShift`"
+  Key="RCtrlShift1 RCtrlShift2 RCtrlShift3 RCtrlShift4 RCtrlShift5 RCtrlShift6 RCtrlShift7 RCtrlShift8 RCtrlShift9 RCtrlShift0"
+  Area="Editor"
+  DisableOutput=1
+{{
+//  %s=akey(1);
+  %s=key(#Akey);
+  %s=replace(%s,"RCtrl","");
+  $IF (%s=="Space") %s=" "; $END
+  $IF (%s=="Shift=") %s="+"; $END
+  $IF (%s=="Shift-") %s="_"; $END
+  $IF (%s=="Shift0") %s=")"; $END
+  $IF (%s=="Shift9") %s="("; $END
+  $IF (%s=="Shift8") %s="*"; $END
+  $IF (%s=="Shift7") %s="&"; $END
+  $IF (%s=="Shift6") %s="^"; $END
+  $IF (%s=="Shift5") %s="%"; $END
+  $IF (%s=="Shift4") %s="$"; $END
+  $IF (%s=="Shift3") %s="#"; $END
+  $IF (%s=="Shift2") %s="@"; $END
+  $IF (%s=="Shift1") %s="!"; $END
+  $IF (%s=="Shift`") %s="~"; $END
+  $IF (!%%SimSUIncSeachX && kbdlayout(0)!=0x4090409) %%SimSUIncSeachX=1; $END //Проверяем язык ввода, если не английский будем транслитерировать %).
+  $IF (%%SimSUIncSeachX) 
+    %s=xlat("Z"+%s);
+    %s=substr(%s,1);
+  $END
+  %%SimSUIncSeachStr=%%SimSUIncSeachStr+%s;
+  CtrlU CtrlHome
+  F7 CtrlY print(%%SimSUIncSeachStr)
+  $IF (!%%SimSUIncSeachSave) //Проводим настройку поиска с сохранением предыдущих настроек.
+    Tab %%SimSUIncSeachCase=dlg.getvalue(dlg.getvalue(0,6),0); Subtract
+    Tab %%SimSUIncSeachWord=dlg.getvalue(dlg.getvalue(0,6),0); Subtract
+    Tab %%SimSUIncSeachRevr=dlg.getvalue(dlg.getvalue(0,6),0); Subtract
+    Tab %%SimSUIncSeachRege=dlg.getvalue(dlg.getvalue(0,6),0); Subtract
+    Tab %%SimSUIncSeachFSel=dlg.getvalue(dlg.getvalue(0,6),0); Add
+  $END
+  %%SimSUIncSeachSave=1;
+  Enter
+  $IF (Dialog) Esc %end=1; $END
+  F7 CtrlY
+  CtrlY CtrlDown $IF (ItemCount>1) ShiftDel Esc $Else ShiftDel $End //Чистим историю.
+  Enter
+  $IF (%end) callplugin(#%Macrolib,"call SimSU_IncSearchCE") $END
+}}
+
+macro
+  Name="SimSU_IncSearchBeg"
+  Descr="Editor: Быстрый поиск (Инициализация). (с) SimSU"
+  Key="RCtrl:Down"
+  Area="Editor"
+  DisableOutput=1
+{{
+  %%SimSUIncSeachStr=""; 
+  %%SimSUIncSeachX=0;
+  %%SimSUIncSeachSave=0;
+}}
+
+macro
+  Name="SimSU_IncSearchEnd"
+  Descr="Editor: Быстрый поиск (Финализация). (с) SimSU"
+  Key="RCtrl:Up"
+  Area="Editor"
+  DisableOutput=1
+{{
+  %%SimSUIncSeachStr=""; 
+  %%SimSUIncSeachX=0;
+  CtrlU
+  F7 CtrlY
+  $IF (%%SimSUIncSeachSave) //Восстанавливаем настройки.
+    Tab $IF (%%SimSUIncSeachCase) Add $ELSE Subtract $END
+    Tab $IF (%%SimSUIncSeachWord) Add $ELSE Subtract $END
+    Tab $IF (%%SimSUIncSeachRevr) Add $ELSE Subtract $END
+    Tab $IF (%%SimSUIncSeachRege) Add $ELSE Subtract $END
+    Tab $IF (%%SimSUIncSeachFSel) Add $ELSE Subtract $END
+  $End
+  Enter
+  %%SimSUIncSeachSave=0;
+}}
+
+macro
+  Name="SimSU_IncSearchCE"
+  Descr="Editor: Быстрый поиск (Коррекция). (с) SimSU"
+  Key="RCtrlBS"
+  Area="Editor"
+  DisableOutput=1
+{{
+  $IF (len(%%SimSUIncSeachStr)>0)
+    %%SimSUIncSeachStr=substr(%%SimSUIncSeachStr,0,len(%%SimSUIncSeachStr)-1);
+    callplugin(#%Macrolib,"call SimSU_IncSearch")
+  $END
+}}
+
+macro
+  Name="SimSU_IncSearchNext"
+  Descr="Editor: Быстрый поиск (Дальше). (с) SimSU"
+  Key="RCtrlEnter"
+  Area="Editor"
+  DisableOutput=1
+{{
+  $IF (len(%%SimSUIncSeachStr)>0)
+    CtrlU F7 CtrlY print(%%SimSUIncSeachStr) Enter
+    $IF (Dialog) Esc $END
+    F7 CtrlY
+    CtrlY CtrlDown $IF (ItemCount>1) ShiftDel Esc $Else ShiftDel $End //Чистим историю.
+    Enter
+  $END
+}}
+;; http://code.google.com/p/simsufar/
