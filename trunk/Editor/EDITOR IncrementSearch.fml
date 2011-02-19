@@ -3,7 +3,7 @@
 ;; Использование: зажав Правый Контрол (RCtrl) набираем текст - получаем быстрое позиционирование,
 ;; не отпуская Правый Контрол (RCtrl), нажав BackSpace отменим последний введенный символ,
 ;; не отпуская Правый Контрол (RCtrl), нажав Enter спозиционируемся на следующее вхождение.
-;; Поиск прекращается при отпускании Правого Контрола (RCtrl).  ЁЁЁ
+;; Поиск прекращается при отпускании Правого Контрола (RCtrl).
 
 const MacroLib = 0x424C434D
 
@@ -37,7 +37,7 @@ macro
   $IF (%s=="Shift1") %s="!"; $END
   $IF (%s=="Shift`") %s="~"; $END
   $IF (!%%SimSUIncSeachX && kbdlayout(0)!=0x4090409) %%SimSUIncSeachX=1; $END //Проверяем язык ввода, если не английский будем транслитерировать %).
-  $IF (%%SimSUIncSeachX) 
+  $IF (%%SimSUIncSeachX)
     %s=xlat("Z"+%s);
     %s=substr(%s,1);
   $END
@@ -67,7 +67,7 @@ macro
   Area="Editor"
   DisableOutput=1
 {{
-  %%SimSUIncSeachStr=""; 
+  %%SimSUIncSeachStr="";
   %%SimSUIncSeachX=0;
   %%SimSUIncSeachSave=0;
 }}
@@ -79,7 +79,7 @@ macro
   Area="Editor"
   DisableOutput=1
 {{
-  %%SimSUIncSeachStr=""; 
+  %%SimSUIncSeachStr="";
   %%SimSUIncSeachX=0;
   CtrlU
   F7 CtrlY
