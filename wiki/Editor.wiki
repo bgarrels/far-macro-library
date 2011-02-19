@@ -10,4 +10,4 @@ Please, translate
 
  * [Editor_SaveAll Сохранить все окна редакторов, в которых есть изменения] (с) Maximus5
 
- * [EDITOR_IncrementSearch] (c)SimSU
+ * [EDITOR_IncrementSearch Быстрый поиск в редакторе] (с) SimSU (i) Maximus5
