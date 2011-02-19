@@ -1,5 +1,7 @@
 #summary Быстрый поиск в редакторе (с) SimSU (i) Maximus5
 
+ * [Editor Макросы для редактора]
+
 Макросы для быстрого поиска в редакторе. (с) SimSU (i) Maximus5 - EditFindLeap 
 
 Поиск ведется с учетом текущего языка (если текущая раскладка не английская то используем xlat).
@@ -18,9 +20,7 @@
 
  + есть возможность быстро найти следующее вхождение.
 
-
- * [Editor Макросы для редактора]
-
+http://code.google.com/p/simsufar/
 === Text ===
 
  * [http://far-macro-library.googlecode.com/svn/trunk/Editor/EDITOR%20IncrementSearch.fml Download FML]
