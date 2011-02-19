@@ -12,8 +12,7 @@
   * release RAlt for clear search buffer
 
 ==== Todo ====
-  * some russian letters are skipped
-  * english Far interface language expected
+  * restore search mode (Substring/Whole/Regular) on RAlt release
 
 === Text ===
 
