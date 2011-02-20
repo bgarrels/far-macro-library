@@ -11,9 +11,16 @@
   * depress RAlt and type search text
   * release RAlt for clear search buffer
 
-==== Todo ====
-  * restore search mode (Substring/Whole/Regular) on RAlt release
-
 === Text ===
 
  * [http://far-macro-library.googlecode.com/svn/trunk/Addon/EdtFind.fml Download FML]
+ * [http://far-macro-library.googlecode.com/svn/trunk/Addon/EdtFind.v2.fml Download FML v2]
+
+=== History ===
+
+==== Max Rusov (v2) ====
+
+ * Вызов EdtFind через CallPlugin (требуется EdtFind v8+)
+ * Сохраняется состояние всех настроек EdtFind
+ * Если очередной вводимый символ не найден, то он не добавляется в строку поиска и выдается звуковой сигнал.
+ * Подсветка найденных вхождений включается, если длина искомой строки >= N (по умолчанию - 2)
