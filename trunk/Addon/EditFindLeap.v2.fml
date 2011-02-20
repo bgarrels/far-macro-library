@@ -18,6 +18,8 @@ const RemoveHilight = 8
 
 ;; Set to 0 to disable xlat(two language) search with RegExp
 const UseXLat = 1
+;; 
+const HilightFrom = 2
 
 
 macro Descr = "Edt Find: Leap search begin" Area = "Editor" Key = "RAlt:Down"
@@ -60,7 +62,7 @@ macro
     %%EditFindLeap = %%EditFindLeap + %s;
   $end
 
-  $if (len(%%EditFindLeap) < 2)
+  $if (len(%%EditFindLeap) < #%HilightFrom)
     %Opt = %Opt + "Highlight:0 ";
   $end
 
