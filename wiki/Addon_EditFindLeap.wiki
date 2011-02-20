@@ -13,8 +13,8 @@
 
 === Text ===
 
- * [http://far-macro-library.googlecode.com/svn/trunk/Addon/EdtitFindLeap.fml Download FML]
- * [http://far-macro-library.googlecode.com/svn/trunk/Addon/EdtitFindLeap.v2.fml Download FML v2]
+ * [http://far-macro-library.googlecode.com/svn/trunk/Addon/EditFindLeap.fml Download FML]
+ * [http://far-macro-library.googlecode.com/svn/trunk/Addon/EditFindLeap.v2.fml Download FML v2]
 
 === History ===
 
