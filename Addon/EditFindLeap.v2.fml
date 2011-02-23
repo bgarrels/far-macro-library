@@ -1,13 +1,13 @@
 //
 // Инкрементальный поиск для плагина EditFind. (с) Maximus5, SimSU, Max Rusov
 //
-// Как пользоваться: 
+// Как пользоваться:
 //
 // Нажать RAlt и не отпуская набирать текст. Поиск идет одновременно по двум языкам через xlat.
 // RAltBS - Удалить последний набранный символ.
 // RAlt   - Сбросить найденный текст
 // Для продолжения поиска вперед/назад используются соответствующие команды плагина EdtFind
-//          
+//
 // Требуется EdtFind v.8+
 // http://code.google.com/p/far-plugins/wiki/EdtFind
 //
@@ -18,7 +18,7 @@ const RemoveHilight = 8
 
 ;; Set to 0 to disable xlat(two language) search with RegExp
 const UseXLat = 1
-;; 
+;;
 const HilightFrom = 2
 
 
@@ -33,7 +33,8 @@ macro
   Area="Editor"
   Bind="RAltA RAltB RAltC RAltD RAltE RAltF RAltG RAltH RAltI RAltJ RAltK RAltL RAltM RAltN RAltO RAltP RAltQ RAltR RAltS RAltT RAltU RAltV RAltW RAltX RAltY RAltZ"
   Bind="RAlt1 RAlt2 RAlt3 RAlt4 RAlt5 RAlt6 RAlt7 RAlt8 RAlt9 RAlt0"
-  Bind="RAlt[ RAlt] RAlt; RAlt' RAlt` RAlt. RAlt, RAlt- RAltShift-" 
+  Bind="RAlt[ RAlt] RAlt; RAlt' RAlt` RAlt. RAlt, RAlt- RAltShift- RAlt=  RAltShift= RAltShift`"
+  Bind="RAltShift1 RAltShift2 RAltShift3 RAltShift4 RAltShift5 RAltShift6 RAltShift7 RAltShift8 RAltShift9 RAltShift0"
   Bind="RAltBS"
 {{
   $if (!callplugin(#%EdtFind, ""))
@@ -46,7 +47,7 @@ macro
   %Opt = "Loop:0 Error:0 ";
 
   $if (%s == "BS")
-    %%EditFindLeap = substr(%%EditFindLeap, 0, -1);
+    %%EditFindLeap = substr(%%EditFindLeap, 0, len(%%EditFindLeap)-1); //Что бы в 1803 работало.
     $if (%%EditFindLeap == "")
       CallPlugin(#%EdtFind, #%RemoveHilight)
       $exit
@@ -56,9 +57,20 @@ macro
       %Opt = %Opt + "Entire:1 ";
     $end
 
-    $if (%s == "Shift-") 
-      %s = "_"; 
-    $end
+    $IF (%s == "Shift-") %s = "_"; $END
+    $IF (%s == "Shift=") %s = "+"; $END
+    $IF (%s == "Shift0") %s = ")"; $END
+    $IF (%s == "Shift9") %s = "("; $END
+    $IF (%s == "Shift8") %s = "*"; $END
+    $IF (%s == "Shift7") %s = "&"; $END
+    $IF (%s == "Shift6") %s = "^"; $END
+    $IF (%s == "Shift5") %s = "%"; $END
+    $IF (%s == "Shift4") %s = "$"; $END
+    $IF (%s == "Shift3") %s = "#"; $END
+    $IF (%s == "Shift2") %s = "@"; $END
+    $IF (%s == "Shift1") %s = "!"; $END
+    $IF (%s == "Shift`") %s = "~"; $END
+
     %%EditFindLeap = %%EditFindLeap + %s;
   $end
 
@@ -68,7 +80,8 @@ macro
 
   %Find = %%EditFindLeap;
   $if (#%UseXLat == 1)
-    %XFind = xlat(%Find);
+    %XFind = xlat("Z"+%Find);  // Помогаем определиться xlat,
+    %XFind = substr(%XFind,1); // а то не находим текст начинающийся с хъжэбю
     $if (%XFind != %Find)
       %Find = "(\\Q" + %Find + "\\E)|(\\Q" + %XFind + "\\E)";
       %Opt = %Opt + "RegExp:1 ";
@@ -89,7 +102,7 @@ macro
     $end
     callplugin(#%EdtFind, %Opt + "Mark " + %Find)
 
-    Beep(0x10);
+    Beep(0x10)
   $end
 }}
 
@@ -99,4 +112,3 @@ macro Descr="Edt Find: Leap search cancel" Area="Editor" key="RAlt:Release"
   CallPlugin(#%EdtFind, #%RemoveHilight)
 //CtrlU
 }}
-
