@@ -1,15 +1,15 @@
-;; Макросы для быстрого поиска в редакторе. (с) SimSU (i) Maximus5 - EditFindLeap
-;; Поиск ведется с учетом текущего языка (если текущая раскладка не английская, то используем xlat).
-;; Использование: зажав Правый Контрол (RCtrl) набираем текст - получаем быстрое позиционирование,
-;; не отпуская Правый Контрол (RCtrl), нажав BackSpace отменим последний введенный символ,
-;; не отпуская Правый Контрол (RCtrl), нажав Enter спозиционируемся на следующее вхождение.
-;; Поиск прекращается при отпускании Правого Контрола (RCtrl).
+;; РњР°РєСЂРѕСЃС‹ РґР»СЏ Р±С‹СЃС‚СЂРѕРіРѕ РїРѕРёСЃРєР° РІ СЂРµРґР°РєС‚РѕСЂРµ. (СЃ) SimSU (i) Maximus5 - EditFindLeap
+;; РџРѕРёСЃРє РІРµРґРµС‚СЃСЏ СЃ СѓС‡РµС‚РѕРј С‚РµРєСѓС‰РµРіРѕ СЏР·С‹РєР° (РµСЃР»Рё С‚РµРєСѓС‰Р°СЏ СЂР°СЃРєР»Р°РґРєР° РЅРµ Р°РЅРіР»РёР№СЃРєР°СЏ, С‚Рѕ РёСЃРїРѕР»СЊР·СѓРµРј xlat).
+;; РСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ: Р·Р°Р¶Р°РІ РџСЂР°РІС‹Р№ РљРѕРЅС‚СЂРѕР» (RCtrl) РЅР°Р±РёСЂР°РµРј С‚РµРєСЃС‚ - РїРѕР»СѓС‡Р°РµРј Р±С‹СЃС‚СЂРѕРµ РїРѕР·РёС†РёРѕРЅРёСЂРѕРІР°РЅРёРµ,
+;; РЅРµ РѕС‚РїСѓСЃРєР°СЏ РџСЂР°РІС‹Р№ РљРѕРЅС‚СЂРѕР» (RCtrl), РЅР°Р¶Р°РІ BackSpace РѕС‚РјРµРЅРёРј РїРѕСЃР»РµРґРЅРёР№ РІРІРµРґРµРЅРЅС‹Р№ СЃРёРјРІРѕР»,
+;; РЅРµ РѕС‚РїСѓСЃРєР°СЏ РџСЂР°РІС‹Р№ РљРѕРЅС‚СЂРѕР» (RCtrl), РЅР°Р¶Р°РІ Enter СЃРїРѕР·РёС†РёРѕРЅРёСЂСѓРµРјСЃСЏ РЅР° СЃР»РµРґСѓСЋС‰РµРµ РІС…РѕР¶РґРµРЅРёРµ.
+;; РџРѕРёСЃРє РїСЂРµРєСЂР°С‰Р°РµС‚СЃСЏ РїСЂРё РѕС‚РїСѓСЃРєР°РЅРёРё РџСЂР°РІРѕРіРѕ РљРѕРЅС‚СЂРѕР»Р° (RCtrl).
 
 const MacroLib = 0x424C434D
 
 macro
   Name="SimSU_IncSearch"
-  Descr="Editor: Быстрый поиск. (с) SimSU"
+  Descr="Editor: Р‘С‹СЃС‚СЂС‹Р№ РїРѕРёСЃРє. (СЃ) SimSU"
   Key="RCtrl1 RCtrl2 RCtrl3 RCtrl4 RCtrl5 RCtrl6 RCtrl7 RCtrl8 RCtrl9 RCtrl0"
   Key="RCtrlQ RCtrlW RCtrlE RCtrlR RCtrlT RCtrlY RCtrlU RCtrlI RCtrlO RCtrlP RCtrl[ RCtrl]"
   Key="RCtrlA RCtrlS RCtrlD RCtrlF RCtrlG RCtrlH RCtrlJ RCtrlK RCtrlL RCtrl; RCtrl'"
@@ -35,15 +35,15 @@ macro
   $IF (%s=="Shift2") %s="@"; $END
   $IF (%s=="Shift1") %s="!"; $END
   $IF (%s=="Shift`") %s="~"; $END
-  $IF (!%%SimSUIncSeachXlat && kbdlayout(0)!=0x4090409) %%SimSUIncSeachXlat=1; $END //Проверяем язык ввода, если не английский будем транслитерировать %).
+  $IF (!%%SimSUIncSeachXlat && kbdlayout(0)!=0x4090409) %%SimSUIncSeachXlat=1; $END //РџСЂРѕРІРµСЂСЏРµРј СЏР·С‹Рє РІРІРѕРґР°, РµСЃР»Рё РЅРµ Р°РЅРіР»РёР№СЃРєРёР№ Р±СѓРґРµРј С‚СЂР°РЅСЃР»РёС‚РµСЂРёСЂРѕРІР°С‚СЊ %).
   $IF (%%SimSUIncSeachXlat)
-    %s=xlat("Z"+%s); // магия Xlat что бы искалось [];',.` - хъжэбюё
+    %s=xlat("Z"+%s); // РјР°РіРёСЏ Xlat С‡С‚Рѕ Р±С‹ РёСЃРєР°Р»РѕСЃСЊ [];',.` - С…СЉР¶СЌР±СЋС‘
     %s=substr(%s,1);
   $END
   %%SimSUIncSeachStr=%%SimSUIncSeachStr+%s;
   CtrlU CtrlHome
   F7 CtrlY print(%%SimSUIncSeachStr)
-  $IF (%%SimSUIncSeachFOpt==0) //Проводим настройку поиска с сохранением предыдущих настроек.
+  $IF (%%SimSUIncSeachFOpt==0) //РџСЂРѕРІРѕРґРёРј РЅР°СЃС‚СЂРѕР№РєСѓ РїРѕРёСЃРєР° СЃ СЃРѕС…СЂР°РЅРµРЅРёРµРј РїСЂРµРґС‹РґСѓС‰РёС… РЅР°СЃС‚СЂРѕРµРє.
     %o="";
     Tab %o=%o+"\nc:"+itoa(dlg.getvalue(dlg.getvalue(0,6),0)); Subtract
     Tab %o=%o+"\nw:"+itoa(dlg.getvalue(dlg.getvalue(0,6),0)); Subtract
@@ -56,14 +56,14 @@ macro
   Enter
   $IF (Dialog) Esc %end=1; $END
   F7 CtrlY
-  CtrlDown $IF (ItemCount>1) ShiftDel Esc $ELSE ShiftDel $END //Чистим историю.
+  CtrlDown $IF (ItemCount>1) ShiftDel Esc $ELSE ShiftDel $END //Р§РёСЃС‚РёРј РёСЃС‚РѕСЂРёСЋ.
   Enter
   $IF (%end) %end=0; beep() callplugin(#%Macrolib,"call SimSU_IncSearchCE") $END
 }}
 
 macro
   Name="SimSU_IncSearchBeg"
-  Descr="Editor: Быстрый поиск (Инициализация). (с) SimSU"
+  Descr="Editor: Р‘С‹СЃС‚СЂС‹Р№ РїРѕРёСЃРє (РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ). (СЃ) SimSU"
   Key="RCtrl:Down"
   Area="Editor"
 {{
@@ -75,7 +75,7 @@ macro
 
 macro
   Name="SimSU_IncSearchEnd"
-  Descr="Editor: Быстрый поиск (Финализация). (с) SimSU"
+  Descr="Editor: Р‘С‹СЃС‚СЂС‹Р№ РїРѕРёСЃРє (Р¤РёРЅР°Р»РёР·Р°С†РёСЏ). (СЃ) SimSU"
   Key="RCtrl:Up"
   Area="Editor"
 {{
@@ -83,7 +83,7 @@ macro
   %%SimSUIncSeachXlat=0;
   CtrlU
   F7 CtrlY
-  $IF (%%SimSUIncSeachFOpt!=0) //Восстанавливаем настройки.
+  $IF (%%SimSUIncSeachFOpt!=0) //Р’РѕСЃСЃС‚Р°РЅР°РІР»РёРІР°РµРј РЅР°СЃС‚СЂРѕР№РєРё.
     %o=%%SimSUIncSeachFOpt;
     Tab $IF (atoi(substr(%o,index(%o,"\nc:")+3,1))) Add $ELSE Subtract $END
     Tab $IF (atoi(substr(%o,index(%o,"\nw:")+3,1))) Add $ELSE Subtract $END
@@ -98,7 +98,7 @@ macro
 
 macro
   Name="SimSU_IncSearchCE"
-  Descr="Editor: Быстрый поиск (Коррекция). (с) SimSU"
+  Descr="Editor: Р‘С‹СЃС‚СЂС‹Р№ РїРѕРёСЃРє (РљРѕСЂСЂРµРєС†РёСЏ). (СЃ) SimSU"
   Key="RCtrlBS"
   Area="Editor"
 {{
@@ -112,7 +112,7 @@ macro
 
 macro
   Name="SimSU_IncSearchNext"
-  Descr="Editor: Быстрый поиск (Дальше). (с) SimSU"
+  Descr="Editor: Р‘С‹СЃС‚СЂС‹Р№ РїРѕРёСЃРє (Р”Р°Р»СЊС€Рµ). (СЃ) SimSU"
   Key="RCtrlEnter"
   Area="Editor"
 {{
@@ -120,7 +120,7 @@ macro
     CtrlU F7 CtrlY print(%%SimSUIncSeachStr) Enter
     $IF (Dialog) Esc %end=1; $END
     F7 CtrlY
-    CtrlDown $IF (ItemCount>1) ShiftDel Esc $ELSE ShiftDel $END //Чистим историю.
+    CtrlDown $IF (ItemCount>1) ShiftDel Esc $ELSE ShiftDel $END //Р§РёСЃС‚РёРј РёСЃС‚РѕСЂРёСЋ.
     Enter
     $IF (%end) %end=0; beep() $END
   $END

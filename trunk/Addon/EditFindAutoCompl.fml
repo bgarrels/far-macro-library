@@ -1,14 +1,14 @@
-//Макрос автозавершения слов. (с) SimSU
-//Используется плагин EditFind Максима Русова.
+//РњР°РєСЂРѕСЃ Р°РІС‚РѕР·Р°РІРµСЂС€РµРЅРёСЏ СЃР»РѕРІ. (СЃ) SimSU
+//РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РїР»Р°РіРёРЅ EditFind РњР°РєСЃРёРјР° Р СѓСЃРѕРІР°.
 
-// Просто набирайте текст в редакторе и набираемое слово будет автоматически
-// дополняться до ближайшего ранее набранного слова, чтобы подтвердить дополнение
-// нажмите CtrlSpace (Контрол + Пробел).
+// РџСЂРѕСЃС‚Рѕ РЅР°Р±РёСЂР°Р№С‚Рµ С‚РµРєСЃС‚ РІ СЂРµРґР°РєС‚РѕСЂРµ Рё РЅР°Р±РёСЂР°РµРјРѕРµ СЃР»РѕРІРѕ Р±СѓРґРµС‚ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё
+// РґРѕРїРѕР»РЅСЏС‚СЊСЃСЏ РґРѕ Р±Р»РёР¶Р°Р№С€РµРіРѕ СЂР°РЅРµРµ РЅР°Р±СЂР°РЅРЅРѕРіРѕ СЃР»РѕРІР°, С‡С‚РѕР±С‹ РїРѕРґС‚РІРµСЂРґРёС‚СЊ РґРѕРїРѕР»РЅРµРЅРёРµ
+// РЅР°Р¶РјРёС‚Рµ CtrlSpace (РљРѕРЅС‚СЂРѕР» + РџСЂРѕР±РµР»).
 const EditFind  = 0x444E4645
 
 macro
   Name="SimSU_EdtFndACompl"
-  Descr="Editor: Автозавершение слов. (c) SimSU"
+  Descr="Editor: РђРІС‚РѕР·Р°РІРµСЂС€РµРЅРёРµ СЃР»РѕРІ. (c) SimSU"
   Key="Q W E R T Y U I O P [ ]"
   Key="A S D F G H J K L ; '"
   Key="Z X C V B N M , ."
@@ -23,7 +23,7 @@ macro
 //  MsgBox("Error", "EdtFind plugin not installed")
     $exit
   $end
-  $IF (%%SimSU_EdtFndACompl) // Удалим предыдущее дополнение вручную, а то могут постоянные блоки и т.п.
+  $IF (%%SimSU_EdtFndACompl) // РЈРґР°Р»РёРј РїСЂРµРґС‹РґСѓС‰РµРµ РґРѕРїРѕР»РЅРµРЅРёРµ РІСЂСѓС‡РЅСѓСЋ, Р° С‚Рѕ РјРѕРіСѓС‚ РїРѕСЃС‚РѕСЏРЅРЅС‹Рµ Р±Р»РѕРєРё Рё С‚.Рї.
     CtrlD
     %%SimSU_EdtFndACompl=0;
   $END
@@ -31,27 +31,27 @@ macro
 //  Eval(Key(#Akey)) //EatOnRun=0
   bm.push()
   CtrlShiftLeft
-  %BegWord=Editor.SelValue; //Начало слова.
+  %BegWord=Editor.SelValue; //РќР°С‡Р°Р»Рѕ СЃР»РѕРІР°.
   $IF (!CallPlugin(#%EditFind,"Highlight:0 Loop:0 Error:0 Reverse:1 RegExp:1 Find (^|\\W)"+%BegWord+"\\w+"))
-    //Не нашли к началу, попытаемся к концу файла.
+    //РќРµ РЅР°С€Р»Рё Рє РЅР°С‡Р°Р»Сѓ, РїРѕРїС‹С‚Р°РµРјСЃСЏ Рє РєРѕРЅС†Сѓ С„Р°Р№Р»Р°.
     CallPlugin(#%EditFind,"Highlight:0 Loop:0 Error:0 Reverse:0 RegExp:1 Find (^|\\W)"+%BegWord+"\\w+")
   $END
   %FindTxt=Editor.SelValue;
-  %AddTxt=substr(%FindTxt,index(%FindTxt,%BegWord)+Len(%BegWord)); //Окончание слова.
+  %AddTxt=substr(%FindTxt,index(%FindTxt,%BegWord)+Len(%BegWord)); //РћРєРѕРЅС‡Р°РЅРёРµ СЃР»РѕРІР°.
   bm.pop()
   $IF (Len(%AddTxt)>0)
     print(%AddTxt)
-    $REP (len(%AddTxt)) ShiftLeft $END //Выделим что дописали.
+    $REP (len(%AddTxt)) ShiftLeft $END //Р’С‹РґРµР»РёРј С‡С‚Рѕ РґРѕРїРёСЃР°Р»Рё.
     %%SimSU_EdtFndACompl=1;
   $ELSE
     %%SimSU_EdtFndACompl=0;
   $END
 }}
 
-//Зададим клавиши принятие автозавершения.
+//Р—Р°РґР°РґРёРј РєР»Р°РІРёС€Рё РїСЂРёРЅСЏС‚РёРµ Р°РІС‚РѕР·Р°РІРµСЂС€РµРЅРёСЏ.
 macro
   Name="SimSU_EdtFndAComplOk"
-  Descr="Editor: Автозавершение слов (Принять). (c) SimSU"
+  Descr="Editor: РђРІС‚РѕР·Р°РІРµСЂС€РµРЅРёРµ СЃР»РѕРІ (РџСЂРёРЅСЏС‚СЊ). (c) SimSU"
   Key="CtrlSpace"
   Area="Editor"
 {{
@@ -62,10 +62,10 @@ macro
   $END
 }}
 
-//Зададим клавиши удаляющие автозавершение.
+//Р—Р°РґР°РґРёРј РєР»Р°РІРёС€Рё СѓРґР°Р»СЏСЋС‰РёРµ Р°РІС‚РѕР·Р°РІРµСЂС€РµРЅРёРµ.
 macro
   Name="SimSU_EdtFndAComplCncl"
-  Descr="Editor: Автозавершение слов (Отменить). (c) SimSU"
+  Descr="Editor: РђРІС‚РѕР·Р°РІРµСЂС€РµРЅРёРµ СЃР»РѕРІ (РћС‚РјРµРЅРёС‚СЊ). (c) SimSU"
   Key="Left Right Up Down BS"
   Area="Editor"
 {{
