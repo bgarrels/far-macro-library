@@ -56,7 +56,7 @@ macro
   Enter
   $IF (Dialog) Esc %end=1; $END
   F7 CtrlY
-  CtrlY CtrlDown $IF (ItemCount>1) ShiftDel Esc $ELSE ShiftDel $END //Чистим историю.
+  CtrlDown $IF (ItemCount>1) ShiftDel Esc $ELSE ShiftDel $END //Чистим историю.
   Enter
   $IF (%end) %end=0; beep() callplugin(#%Macrolib,"call SimSU_IncSearchCE") $END
 }}
@@ -70,7 +70,7 @@ macro
   %%SimSUIncSeachStr="";
   %%SimSUIncSeachXlat=0;
   %%SimSUIncSeachFOpt=0;
-//// сохранение/восстановление выделения  #Include "%%SimSU_EditSel_Save.fmi" %%SimSUIncSeachSelect=%SimSUBlockPos;
+  #Include "%%SimSU_EditSel_Save.fmi" %%SimSUIncSeachSelect=%SimSUBlockPos;
 }}
 
 macro
@@ -93,7 +93,7 @@ macro
     %%SimSUIncSeachFOpt=0;
   $End
   Enter
-//// сохранение/восстановление выделения  #Include "%%SimSU_EditPos_Save.fmi" %SimSUBlockPos=%%SimSUIncSeachSelect;  #Include "%%SimSU_EditSel_Restore.fmi"  #Include "%%SimSU_EditPos_Restore.fmi"
+  #Include "%%SimSU_EditPos_Save.fmi" %SimSUBlockPos=%%SimSUIncSeachSelect;  #Include "%%SimSU_EditSel_Restore.fmi"  #Include "%%SimSU_EditPos_Restore.fmi"
 }}
 
 macro
@@ -120,7 +120,7 @@ macro
     CtrlU F7 CtrlY print(%%SimSUIncSeachStr) Enter
     $IF (Dialog) Esc %end=1; $END
     F7 CtrlY
-    CtrlY CtrlDown $IF (ItemCount>1) ShiftDel Esc $ELSE ShiftDel $END //Чистим историю.
+    CtrlDown $IF (ItemCount>1) ShiftDel Esc $ELSE ShiftDel $END //Чистим историю.
     Enter
     $IF (%end) %end=0; beep() $END
   $END
