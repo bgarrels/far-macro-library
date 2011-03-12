@@ -13,3 +13,5 @@ This macroses are intended for work with foreign plugins.
  * [Addon_VisualCompare VisualCompare tricks]
 
  * [Addon_SizeManager Macro is allow to walking through the directories if SizeManager plugin is open]
+
+ * [Addon_EditFindAutoCompl Automatic word completion (using EditFind plugin)]

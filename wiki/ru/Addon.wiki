@@ -13,3 +13,5 @@
  * [Addon_VisualCompare Облегчение навигации в VisualCompare]
 
  * [Addon_SizeManager Макрос для хождения по каталогам при открытом SizeManager]
+
+ * [Addon_EditFindAutoCompl Автозавершение слов для EditFind]
