@@ -1,6 +1,6 @@
 #summary Automatic word completion (using EditFind plugin)
 
- * [Addon Макросы для плагинов]
+ * [Addon Macroses for plugins]
 
 === Description ===
 
