@@ -1,4 +1,4 @@
-#summary Автозавершение слов для EditFind
+﻿#summary Автозавершение слов для EditFind
 
  * [Addon Макросы для плагинов]
 

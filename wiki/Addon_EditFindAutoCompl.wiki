@@ -1,4 +1,4 @@
-#summary Automatic word completion (using EditFind plugin)
+﻿#summary Automatic word completion (using EditFind plugin)
 
  * [Addon Macroses for plugins]
 
