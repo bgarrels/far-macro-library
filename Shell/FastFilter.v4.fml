@@ -1,0 +1,299 @@
+﻿
+// 110204 Maximus5 - одновременно фильтруется по двум языкам через xlat
+//                 - курсор сдвигается не первый найденный элемент, если до фильтрации был на ".."
+//                 - запоминается (и восстанавливается) режим 'Toggle folder filter'
+// 110216 Maximus5 - при нажатии Enter, после выполнения (вход в папку, запуск файла,...) фильтр сбрасывается
+// 110331 Maximus5 - FastFilterClear не только убирает свой фильтр, 
+//                   но если его нет - то снимает любой фильтр на панели
+// 110501 Maximus5 - Обработка букв "БЮХЪЖЭЁ"
+
+const MacroLib = 0x424C434D
+const FilterName = "$FastFilter"
+
+macro
+  Name="FastFilterClear"
+  Descr="Fast filter: Clear Filter"
+  //Bind="RAlt"
+  Bind="RAltBS"
+  Area="Shell"
+{{
+  F9 c i
+
+  $if (menu.select(#%FilterName, 1) > 0)
+    DEL Enter
+    Enter
+  $else
+    ShiftBS Enter
+  $end
+
+  %%FastFilterSet=0;
+}}
+
+
+macro
+  Descr="Fast filter: Enter and clear filter"
+  Bind="Enter"
+  Area="Shell"
+  DisableOutput=0
+{{
+  Enter
+  $if (Shell && %%FastFilterSet==1)
+    CallPlugin(#%MacroLib, "Call FastFilterClear")
+    %%FastFilterSet=0;
+  $end
+}}
+
+
+macro
+  Descr="Fast filter: Add symbol"
+  Bind="RAltA RAltB RAltC RAltD RAltE RAltF RAltG RAltH RAltI RAltJ RAltK RAltL RAltM RAltN RAltO RAltP RAltQ RAltR RAltS RAltT RAltU RAltV RAltW RAltX RAltY RAltZ"
+  Bind="RAlt1 RAlt2 RAlt3 RAlt4 RAlt5 RAlt6 RAlt7 RAlt8 RAlt9 RAlt0"
+  Bind="RAlt[ RAlt] RAlt; RAlt' RAlt` RAlt. RAlt," 
+  Area="Shell"
+{{
+  %s = substr(Key(#AKey), 4, 1);
+
+  F9 c i
+
+  $if (menu.select(#%FilterName, 1) == 0)
+    %%FastFilterMask = "";
+  $else
+    %s = %%FastFilterMask + %s;
+  $end
+  %%FastFilterMask = %s;
+  // Через "Z", чтобы корректно xlat срабатывал
+  %sx = substr(xlat("Z"+%s),1);
+  $if (%s!=%sx)
+    // Отрезать от начала маски ".," это служебные символы, и только мешают фильтру
+    $while (%s!="" && index(",.",substr(%s,0,1))>=0) %s = substr(%s,1); $end
+    %s = replace(replace(%s,".","?"),",","?");
+    $while (%sx!="" && index(",.",substr(%sx,0,1))>=0) %sx = substr(%sx,1); $end
+    %sx = replace(replace(%sx,".","?"),",","?");
+    $if (%s=="" && %sx=="") $Exit $end
+    //$if (len(%s)>1) MsgBox("2. %s!=%sx","<"+%s+">\n<"+%sx+">") $end
+    $if (%s=="")
+      %s = %sx;
+    $else $if (%sx!="")
+      %s = %s + "*,*" + %sx;
+    $end $end
+  $else
+    // Отрезать от начала маски ".," это служебные символы, и только мешают фильтру
+    $while (%s!="" && index(",.",substr(%s,0,1))>=0) %s = substr(%s,1); $end
+    %s = replace(replace(%s,".","?"),",","?");
+    $if (%s=="") $Exit $end
+  $end
+
+
+  $if (menu.select(#%FilterName, 1) == 0)
+    Ins
+    print(#%FilterName)
+
+    Tab Tab
+
+    print("*" + %s + "*")
+
+    $if (%%FastFilterDir == 1)
+      // Фильтруем каталоги тоже
+      AltD Multiply
+    $end
+
+    Enter
+
+    %%FastFilterExc = 0;   // Не запоминаем 
+
+    $if (%%FastFilterExc) 
+      Subtract
+    $else
+      Add
+    $end
+
+    Enter
+
+  $else
+    F4 
+    Tab Tab 
+
+    print("*" + %s + "*")
+  
+    Enter
+    Enter
+  $end
+
+  %%FastFilterSet=1;
+
+  $if (Shell && !APanel.Empty && APanel.Bof && APanel.Current == "..")
+    $if (%%FastFilterDir == 1)
+      // Фильтруем каталоги тоже
+      Down
+    $else
+      // Перейти к первому файлу на панели
+      %n = 1; $while (%n <= APanel.ItemCount) $if ((panelitem(0,%n,2) & 0x10) == 0) panel.setposidx(0,%n) %n = APanel.ItemCount + 1; $else %n = %n + 1; $end $end
+    $end
+  $end
+}}
+
+
+
+macro
+  Descr="Fast filter: Delete symbol"
+  //Bind="RAltBS"
+  Area="Shell"
+{{
+  F9 c i
+
+  $if (menu.select(#%FilterName, 1) > 0)
+    F4
+    Tab Tab
+
+    %%FastFilterMask = substr(%%FastFilterMask,0,-1);
+    %sx = xlat(%%FastFilterMask);
+    $if (%%FastFilterMask!=%sx) %s = %%FastFilterMask + "*,*" + %sx; $else %s = %%FastFilterMask; $end
+    print("*" + %s + "*")
+  
+    Enter
+    Enter
+  $else
+    Esc
+  $end
+}}
+
+
+macro
+  Name="FastFilterPrompt"
+  Descr="Fast filter: Input filter"
+  Bind="RAlt/"
+  Area="Shell"
+{{
+  F9 c i
+
+  $if (menu.select(#%FilterName, 1) > 0)
+    F4
+    Tab Tab
+
+    %Filter = dlg.getvalue(dlg.CurPos, 0);
+
+    %L = len(%Filter);
+    $if ((%L > 2) && (substr(%Filter, 0, 1) == "*") && (substr(%Filter, %L - 1, 1) == "*"))
+      %Filter = substr(%Filter, 1, %L - 2);
+    $end
+
+    Esc
+    Esc
+
+  $else
+    Esc
+  $end
+
+  // Спрашиваем фильтр
+  %Filter = prompt("Fast filter", "Input Filter:", 8, %Filter, "FastFilter.Text");
+
+  $if (%Filter != "") 
+    F9 c i
+    $if (menu.select(#%FilterName, 1) == 0)
+      Ins
+      print(#%FilterName)
+
+      Tab Tab
+
+      print("*" + %Filter + "*")
+
+      $if (%%FastFilterDir == 1)
+        // Фильтруем каталоги тоже
+        AltD Multiply
+      $end
+
+      Enter
+
+      %%FastFilterExc = 0;   // Не запоминаем 
+
+      $if (%%FastFilterExc) 
+        Subtract
+      $else
+        Add
+      $end
+
+      Enter
+
+    $else
+      F4 
+      Tab Tab 
+
+      print("*" + %Filter + "*")
+    
+      Enter
+      Enter
+    $end
+
+  $else
+    F9 c i
+    $if (menu.select(#%FilterName, 1) > 0)
+      DEL Enter
+      Enter
+    $else
+      Esc
+    $end
+  $end
+}}
+
+
+macro
+  Name="FastFilterInclusive"
+  Descr="Fast filter: Inclusive/Exclisive filter"
+  Bind="RAlt-"
+  Area="Shell"
+{{
+  %%FastFilterExc = iif(%%FastFilterExc == 0, 1, 0);
+
+  F9 c i
+  $if (menu.select(#%FilterName, 1) > 0)
+
+    BS
+    menu.select(#%FilterName, 1)
+
+    $if (%%FastFilterExc) 
+      Subtract
+    $else
+      Add
+    $end
+
+    Enter
+
+  $else
+    Esc
+  $end
+}}
+
+
+macro
+  Name="FastFilterToggleFolder"
+  Descr="Fast filter: Toggle folder filter"
+  Bind="RAlt\"
+  Area="Shell"
+{{
+  %%FastFilterDir = iif(%%FastFilterDir == 0, 1, 0);
+  msave("%%FastFilterDir")
+
+  F9 c i
+  $if (menu.select(#%FilterName, 1) > 0)
+    F4
+
+    AltD
+
+    $if (%%FastFilterDir) 
+      Multiply
+    $else
+      Subtract
+    $end
+
+    Enter
+    Enter
+
+    $if (%%FastFilterDir != 1 && (panel.fattr(0,APanel.Current)&0x10))
+      // Перейти к первому файлу на панели
+      %n = 1; $while (%n <= APanel.ItemCount) $if ((panelitem(0,%n,2) & 0x10) == 0) panel.setposidx(0,%n) %n = APanel.ItemCount + 1; $else %n = %n + 1; $end $end
+    $end
+
+  $else
+    Esc
+  $end
+}}
