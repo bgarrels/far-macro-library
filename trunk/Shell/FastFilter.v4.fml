@@ -1,11 +1,12 @@
 ﻿
 // 110204 Maximus5 - одновременно фильтруется по двум языкам через xlat
-//                 - курсор сдвигается не первый найденный элемент, если до фильтрации был на ".."
+//                 - курсор сдвигается на первый найденный элемент, если до фильтрации был на ".."
 //                 - запоминается (и восстанавливается) режим 'Toggle folder filter'
 // 110216 Maximus5 - при нажатии Enter, после выполнения (вход в папку, запуск файла,...) фильтр сбрасывается
-// 110331 Maximus5 - FastFilterClear не только убирает свой фильтр, 
+// 110331 Maximus5 - FastFilterClear не только убирает свой фильтр,
 //                   но если его нет - то снимает любой фильтр на панели
 // 110501 Maximus5 - Обработка букв "БЮХЪЖЭЁ"
+// 110505 SimSU    - Отвязка от языка интерфейса
 
 const MacroLib = 0x424C434D
 const FilterName = "$FastFilter"
@@ -17,7 +18,7 @@ macro
   Bind="RAltBS"
   Area="Shell"
 {{
-  F9 c i
+  CtrlI
 
   $if (menu.select(#%FilterName, 1) > 0)
     DEL Enter
@@ -36,11 +37,17 @@ macro
   Area="Shell"
   DisableOutput=0
 {{
-  Enter
-  $if (Shell && %%FastFilterSet==1)
-    CallPlugin(#%MacroLib, "Call FastFilterClear")
+  $if (%%FastFilterSet==1)
+    CtrlI
+    $if (menu.select(#%FilterName, 1) > 0)
+      DEL Enter
+      Enter
+    $else
+      ShiftBS Enter
+    $end
     %%FastFilterSet=0;
   $end
+  $IF (eval("Enter",2)==-2) Enter $END //Если на Enter есть другие макросы, то выполним их.
 }}
 
 
@@ -48,12 +55,12 @@ macro
   Descr="Fast filter: Add symbol"
   Bind="RAltA RAltB RAltC RAltD RAltE RAltF RAltG RAltH RAltI RAltJ RAltK RAltL RAltM RAltN RAltO RAltP RAltQ RAltR RAltS RAltT RAltU RAltV RAltW RAltX RAltY RAltZ"
   Bind="RAlt1 RAlt2 RAlt3 RAlt4 RAlt5 RAlt6 RAlt7 RAlt8 RAlt9 RAlt0"
-  Bind="RAlt[ RAlt] RAlt; RAlt' RAlt` RAlt. RAlt," 
+  Bind="RAlt[ RAlt] RAlt; RAlt' RAlt` RAlt. RAlt,"
   Area="Shell"
 {{
   %s = substr(Key(#AKey), 4, 1);
 
-  F9 c i
+  CtrlI
 
   $if (menu.select(#%FilterName, 1) == 0)
     %%FastFilterMask = "";
@@ -94,14 +101,14 @@ macro
 
     $if (%%FastFilterDir == 1)
       // Фильтруем каталоги тоже
-      AltD Multiply
+      $REP (8) Tab $END Multiply //AltD Multiply
     $end
 
     Enter
 
-    %%FastFilterExc = 0;   // Не запоминаем 
+    %%FastFilterExc = 0;   // Не запоминаем
 
-    $if (%%FastFilterExc) 
+    $if (%%FastFilterExc)
       Subtract
     $else
       Add
@@ -110,11 +117,11 @@ macro
     Enter
 
   $else
-    F4 
-    Tab Tab 
+    F4
+    Tab Tab
 
     print("*" + %s + "*")
-  
+
     Enter
     Enter
   $end
@@ -139,7 +146,7 @@ macro
   //Bind="RAltBS"
   Area="Shell"
 {{
-  F9 c i
+  CtrlI
 
   $if (menu.select(#%FilterName, 1) > 0)
     F4
@@ -149,7 +156,7 @@ macro
     %sx = xlat(%%FastFilterMask);
     $if (%%FastFilterMask!=%sx) %s = %%FastFilterMask + "*,*" + %sx; $else %s = %%FastFilterMask; $end
     print("*" + %s + "*")
-  
+
     Enter
     Enter
   $else
@@ -161,10 +168,10 @@ macro
 macro
   Name="FastFilterPrompt"
   Descr="Fast filter: Input filter"
-  Bind="RAlt/"
+  Bind="RAlt=" // RAlt/ у мну не работает...
   Area="Shell"
 {{
-  F9 c i
+  CtrlI
 
   $if (menu.select(#%FilterName, 1) > 0)
     F4
@@ -187,8 +194,8 @@ macro
   // Спрашиваем фильтр
   %Filter = prompt("Fast filter", "Input Filter:", 8, %Filter, "FastFilter.Text");
 
-  $if (%Filter != "") 
-    F9 c i
+  $if (%Filter != "")
+    CtrlI
     $if (menu.select(#%FilterName, 1) == 0)
       Ins
       print(#%FilterName)
@@ -199,14 +206,14 @@ macro
 
       $if (%%FastFilterDir == 1)
         // Фильтруем каталоги тоже
-        AltD Multiply
+        $REP (8) Tab $END Multiply //AltD Multiply
       $end
 
       Enter
 
-      %%FastFilterExc = 0;   // Не запоминаем 
+      %%FastFilterExc = 0;   // Не запоминаем
 
-      $if (%%FastFilterExc) 
+      $if (%%FastFilterExc)
         Subtract
       $else
         Add
@@ -215,17 +222,17 @@ macro
       Enter
 
     $else
-      F4 
-      Tab Tab 
+      F4
+      Tab Tab
 
       print("*" + %Filter + "*")
-    
+
       Enter
       Enter
     $end
 
   $else
-    F9 c i
+    CtrlI
     $if (menu.select(#%FilterName, 1) > 0)
       DEL Enter
       Enter
@@ -244,13 +251,13 @@ macro
 {{
   %%FastFilterExc = iif(%%FastFilterExc == 0, 1, 0);
 
-  F9 c i
+  CtrlI
   $if (menu.select(#%FilterName, 1) > 0)
 
     BS
     menu.select(#%FilterName, 1)
 
-    $if (%%FastFilterExc) 
+    $if (%%FastFilterExc)
       Subtract
     $else
       Add
@@ -273,13 +280,13 @@ macro
   %%FastFilterDir = iif(%%FastFilterDir == 0, 1, 0);
   msave("%%FastFilterDir")
 
-  F9 c i
+  CtrlI
   $if (menu.select(#%FilterName, 1) > 0)
     F4
 
-    AltD
+    $REP (10) Tab $END //AltD
 
-    $if (%%FastFilterDir) 
+    $if (%%FastFilterDir)
       Multiply
     $else
       Subtract
