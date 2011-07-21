@@ -22,6 +22,7 @@
  * [http://far-macro-library.googlecode.com/svn/trunk/Shell/FastFilter.v2.fml Загрузить FML v2]
  * [http://far-macro-library.googlecode.com/svn/trunk/Shell/FastFilter.v3.fml Загрузить FML v3]
  * [http://far-macro-library.googlecode.com/svn/trunk/Shell/FastFilter.v4.fml Загрузить FML v4]
+ * [http://far-macro-library.googlecode.com/svn/trunk/Shell/FastFilter.v5.fml Загрузить FML v5]
 
 === Изменения ===
 ==== 110204 Maximus5 (v2) ====
@@ -33,3 +34,9 @@
 ==== 110501 Maximus5 (v4) ====
   * FastFilterClear не только убирает свой фильтр, но если его нет - то снимает любой фильтр на панели
   * Обработка букв "БЮХЪЖЭЁ"
+==== 110721 Maximus5 (v5) ====
+  * раздельная обработка быстрых фильтров на правой и левой панелях
+  * для ускорения ввода (особенно на сетевых дисках) фильтр применяется только при RAlt:Up
+  * во время ввода фильтра он "печатается" к ком.строке
+  * во время ввода фильтра RAltBS удаляет последний введенный символ
+  * однократное нажатие RAlt открывает QSearch с введенным "*"
