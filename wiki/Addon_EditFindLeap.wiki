@@ -15,6 +15,7 @@
 
  * [http://far-macro-library.googlecode.com/svn/trunk/Addon/EditFindLeap.fml Download FML]
  * [http://far-macro-library.googlecode.com/svn/trunk/Addon/EditFindLeap.v2.fml Download FML v2]
+ * [http://far-macro-library.googlecode.com/svn/trunk/Addon/EditFindLeap.v3.fml Download FML v3]
 
 === History ===
 
@@ -24,3 +25,8 @@
  * Сохраняется состояние всех настроек EdtFind
  * Если очередной вводимый символ не найден, то он не добавляется в строку поиска и выдается звуковой сигнал.
  * Подсветка найденных вхождений включается, если длина искомой строки >= N (по умолчанию - 2)
+
+==== Maximus5 (v3) ====
+ * Far3, MacroLib 1.0.13, EdtFind v.8+
+ * Добавлена обработка RAltSpace, поправка для RAltShift_
+ * перед выполнением поиска добавляется «стековая закладка» BM.add()
