@@ -21,12 +21,12 @@
 
 ==== Max Rusov (v2) ====
 
- * Вызов EdtFind через CallPlugin (требуется EdtFind v8+)
- * Сохраняется состояние всех настроек EdtFind
- * Если очередной вводимый символ не найден, то он не добавляется в строку поиска и выдается звуковой сигнал.
- * Подсветка найденных вхождений включается, если длина искомой строки >= N (по умолчанию - 2)
+ * Call EdtFind via CallPlugin (EdtFind v8+ required)
+ * All EdtFind settings are left unchanged
+ * Beep on not found symbol, it will not be added to search string
+ * Hilighting after string length >= N (2 by defalt)
 
 ==== Maximus5 (v3) ====
  * Far3, MacroLib 1.0.13, EdtFind v.8+
- * Добавлена обработка RAltSpace, поправка для RAltShift_
- * перед выполнением поиска добавляется «стековая закладка» BM.add()
+ * RAltSpace supported, RAltShift_ fixed
+ * «stack bookmark» added before search: BM.add()
