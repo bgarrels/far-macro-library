@@ -1,4 +1,5 @@
 #summary Переключение между окнами по Alt-Цифра
+#sidebar TableOfContents
 
  * [Common Общие макросы]
 

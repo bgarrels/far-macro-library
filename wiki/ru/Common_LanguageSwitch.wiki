@@ -1,0 +1,12 @@
+#summary Смена языка интерфейса English<-->Russian (c) Maximus5
+#sidebar TableOfContents
+
+ * [Common Общие макросы]
+
+=== Описание ===
+
+ Сменить язык интерфейса Русский/Английский. Может вызываться из панелей или немодальных редакторов/вьюверов.
+
+=== Текст ===
+
+ * [http://far-macro-library.googlecode.com/svn/trunk/Common/LanguageSwitch.fml Загрузить FML]

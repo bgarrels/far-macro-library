@@ -1,0 +1,13 @@
+#summary Switch interface language English<-->Russian (c) Maximus5
+#sidebar TableOfContents
+
+ * [Common Common macros]
+
+=== Description ===
+
+ Switch interface language between English and Russian. May be executed in panels or nonmodal editor/viewer.
+
+=== Text ===
+
+ * [http://far-macro-library.googlecode.com/svn/trunk/Common/LanguageSwitch.fml Download FML]
+

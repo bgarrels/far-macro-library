@@ -11,3 +11,5 @@ Macroses, available in the any context (almost).
  * [Common_F11 F11 - autoselect last used plugin in the plugins menu] (c) Maximus5
 
  * [Common_MacroAreaInfo Display current MacroArea/Dialog GUID information]
+
+ * [Common_LanguageSwitch Switch interface language English<-->Russian]  (c) Maximus5

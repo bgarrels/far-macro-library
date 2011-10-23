@@ -1,4 +1,7 @@
 #summary Информация по текущей MacroArea/GUID диалога
+#sidebar TableOfContents
+
+ * [Common Общие макросы]
 
 === Описание ===
 
@@ -7,4 +10,9 @@
 === Текст ===
 
  * [http://far-macro-library.googlecode.com/svn/trunk/Common/MacroAreaInfo.fml Загрузить FML]
+ * [http://far-macro-library.googlecode.com/svn/trunk/Common/MacroAreaInfo.v2.fml Загрузить FML v2]
 
+=== История ===
+
+==== Maximus5 (v2) ====
+ * Требуется Far3 build 2202

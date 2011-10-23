@@ -1,12 +1,13 @@
-#summary F11 - выделение в меню плагинов предыдущего выбранного (c) Maximus5
+#summary F11 - autoselect last used plugin in the plugin menu (c) Maximus5
+#sidebar TableOfContents
 
- * [Common Общие макросы]
+ * [Common Common macros]
 
-=== Описание ===
+=== Description ===
 
  Открыть меню плагинов и выделить плагин, выбранный в предыдущее открытие F11 (любая область) или !AltShiftF9 (файловые панели)
 
-=== Текст ===
+=== Text ===
 
  * [http://far-macro-library.googlecode.com/svn/trunk/Common/F11.fml Download FML]
 
