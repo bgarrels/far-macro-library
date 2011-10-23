@@ -6,4 +6,10 @@
 === Текст ===
 
  * [http://far-macro-library.googlecode.com/svn/trunk/Common/InputMacro.fml Загрузить FML]
+ * [http://far-macro-library.googlecode.com/svn/trunk/Common/InputMacro.v2.fml Download FML v2]
 
+=== История ===
+
+==== Maximus5 (v2) ====
+ * Рекомендуется Far3 build 2172
+ * Rus/Eng локализация

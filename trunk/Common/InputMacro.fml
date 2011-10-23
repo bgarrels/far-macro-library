@@ -1,4 +1,4 @@
-macro
+п»їmacro
   Name = "InputMacro"
   Descr = "Input Macro"
   Key = "CtrlAltF12"
@@ -13,7 +13,7 @@ macro
       eval(%s);
       $exit
     $else
-      eval(%s);  // Чтобы показать ошибку
+      eval(%s);  // Р§С‚РѕР±С‹ РїРѕРєР°Р·Р°С‚СЊ РѕС€РёР±РєСѓ
     $end
   $end
 }}
