@@ -2,7 +2,8 @@
 
  * [Dialog Dialog macros]
 
-=== Описание ===
+=== Description ===
+
 Данный макрос придаёт диалогам FAR свойство аналогичное диалогам Windows - при входе в поле редактированирования происходит выделение текста.
 
 Макрос, практически, аналогичен плагину:
@@ -26,6 +27,7 @@
 - теряется состояние неизменённого текста (это, на мой взгляд несуществено для тех кто привык к Windows, там такого нет :) )
 
 http://code.google.com/p/simsufar/
+
 === Text ===
 
  * [http://far-macro-library.googlecode.com/svn/trunk/Dialog/DIALOG%20EditSelect.fml Download FML]
