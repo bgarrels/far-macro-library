@@ -1,0 +1,61 @@
+
+// Макрос меняет режим циклической прокрутки меню и списков следующим образом: 
+// когда зажата кнопка Up (Down) курсор, пробежав до самого верха (низа) останавливается. 
+// Но, если на самой верхней (нижней) строке еще раз нажать кнопку Up (Down) - 
+// курсор перепрыгивает в другой конец списка и продолжает перемещение.
+
+// (c) Max Rusov, (i) Maximus5
+
+
+macro Descr = "Menu Up" Key = "Up" Area = "Menu UserMenu MainMenu ACompl Dialog Disks" Priority=-9
+{{
+  $if (Dialog && ((Dlg.ItemType < 11) || (ItemCount <= 0)))
+    Eval(Key(#AKey))
+    $Exit
+  $end
+
+  $if (CurPos > 1)
+    Up
+  $end
+}}
+
+macro Descr = "Menu Up" Key = "Up:Down" Area = "Menu UserMenu MainMenu ACompl Dialog Disks" Priority=-8
+{{
+  $if (Dialog && ((Dlg.ItemType < 11) || (ItemCount <= 0)))
+    Eval(Key(#AKey))
+    $Exit
+  $end
+
+  $if (CurPos > 1)
+    Up
+  $else
+    End
+  $end
+}}
+
+
+macro Descr = "Menu Down" Key = "Down" Area = "Menu UserMenu MainMenu ACompl Dialog Disks" Priority=-9
+{{
+  $if (Dialog && ((Dlg.ItemType < 11) || (ItemCount <= 0)))
+    Eval(Key(#AKey))
+    $Exit
+  $end
+
+  $if (CurPos < ItemCount)
+    Down
+  $end
+}}
+
+macro Descr = "Menu Down" Key = "Down:Down" Area = "Menu UserMenu MainMenu ACompl Dialog Disks" Priority=-8
+{{
+  $if (Dialog && ((Dlg.ItemType < 11) || (ItemCount <= 0)))
+    Eval(Key(#AKey))
+    $Exit
+  $end
+
+  $if (CurPos < ItemCount)
+    Down
+  $else
+    Home
+  $end
+}}
