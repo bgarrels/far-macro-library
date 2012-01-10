@@ -1,0 +1,10 @@
+#summary Циклическая прокрутка списков и меню (c) Max Rusov
+
+ * [Dialog Макросы для диалогов]
+
+=== Описание ===
+
+
+=== Text ===
+
+ * [http://far-macro-library.googlecode.com/svn/trunk/Dialog/LoopScroll.fml Download FML]
