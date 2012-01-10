@@ -1,4 +1,4 @@
-#summary Dialog macros
+﻿#summary Dialog macros
 
 Please, translate
 
