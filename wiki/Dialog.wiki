@@ -10,3 +10,4 @@ Please, translate
 
  * [Dialog_EditSelect Макрос выделяющий текст в строках ввода FAR аналогично Windows] (с) SimSU
  
+ * [Dialog_LoopScroll Циклическая прокрутка списков и меню]
