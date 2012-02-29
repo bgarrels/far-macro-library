@@ -1,0 +1,227 @@
+
+;;
+;; Shell Bookmark - закладки в панел€х
+;; (c) Max Rusov
+;; (i) Kerberos464
+;; http://forum.farmanager.com/viewtopic.php?f=15&t=6137
+;;
+;; RCtrlShift+Ѕуквы»ли÷ифры - ”становить закладку
+;; RCtrl+Ѕуквы»ли÷ифры      - ѕерейти к закладке
+;; Ctrl+/                   - ћеню закладок
+;;
+
+
+const MacroLib = "84884660-5B2F-4581-9282-96E00AE109A2"
+
+
+macro Area="Shell" Description="Shell Bookmark: Start"
+   Key="RCtrl:Down" EatOnRun=0
+{{
+  %%BookmarkName = "";
+}}
+
+
+macro Area="Shell" Description="Shell Bookmark: Define"
+//Key="/RCtrlShift\w/"
+  Key="RCtrlShift1 RCtrlShift2 RCtrlShift3 RCtrlShift4 RCtrlShift5 RCtrlShift6 RCtrlShift7 RCtrlShift8 RCtrlShift9 RCtrlShift0"
+  Key="RCtrlShiftA RCtrlShiftB RCtrlShiftC RCtrlShiftD RCtrlShiftE RCtrlShiftF RCtrlShiftG RCtrlShiftH RCtrlShiftI"
+  Key="RCtrlShiftJ RCtrlShiftK RCtrlShiftL RCtrlShiftM RCtrlShiftN RCtrlShiftO RCtrlShiftP RCtrlShiftQ RCtrlShiftR"
+  Key="RCtrlShiftS RCtrlShiftT RCtrlShiftU RCtrlShiftV RCtrlShiftW RCtrlShiftX RCtrlShiftY RCtrlShiftZ"
+{{
+  %%BookmarkMode = 1;
+  %%BookmarkName = %%BookmarkName + substr(AKey(2), -1);
+}}
+
+
+macro Area="Shell" Description="Shell Bookmark: Go to"
+//Key="/RCtrl\w/"
+  Key="RCtrl1 RCtrl2 RCtrl3 RCtrl4 RCtrl5 RCtrl6 RCtrl7 RCtrl8 RCtrl9 RCtrl0"
+  Key="RCtrlA RCtrlB RCtrlC RCtrlD RCtrlE RCtrlF RCtrlG RCtrlH RCtrlI"
+  Key="RCtrlJ RCtrlK RCtrlL RCtrlM RCtrlN RCtrlO RCtrlP RCtrlQ RCtrlR"
+  Key="RCtrlS RCtrlT RCtrlU RCtrlV RCtrlW RCtrlX RCtrlY RCtrlZ"
+{{
+  %%BookmarkMode = 0;
+  %%BookmarkName = %%BookmarkName + substr(AKey(2), -1);
+}}
+
+
+
+// ≈сли при нажата CtrlShift и раньше отпускаетс€ Ctrl, то макрос на Ctrl:Up не вызываетс€
+// Ёто затычка, дл€ обхода этой проблемы (ошибка в MacrLib?)
+
+macro Area="Shell" Description="Shell Bookmark: Finish" 
+  Key="Shift:Up"
+{{
+  $if (%%BookmarkName && %%BookmarkMode)
+    CallPlugin(#%MacroLib, "call GotoBookmark");
+  $end
+}}
+
+
+macro Area="Shell" Name="GotoBookmark" Description="Shell Bookmark: Finish" Priority=-1
+   Key="RCtrl:Up"
+{{
+  %Name = %%BookmarkName;
+  %%BookmarkName = "";
+
+  $if (%Name)
+    %Bookmark = "Folder" + %Name; // FolderA, FolderB, FolderC,...
+
+    $if (%%BookmarkMode)
+
+      eval("%OldFolder=" + "%%" + %Bookmark + ";")
+
+      $if (APanel.Plugin)
+        %Folder = APanel.Prefix + ":" + APanel.Path;
+      $else
+        %Folder = APanel.Path;
+      $end
+
+      $if (%OldFolder)
+      	%Replace = MsgBox("Bookmark " + %Name, "Already assigned to:\n" + %OldFolder + "\n Do you want redefine it?\n", 0x40000);
+      	$if (%Replace != 1)
+      	  $exit
+      	$end
+      $end
+
+      %Folder = Prompt("Bookmark " + %Name, "Assign to:", 0x10, %Folder, "Shell.Bokmark");
+      $if (%Folder == 0)
+        $exit
+      $end
+
+      eval("%%" + %Bookmark + "=@\"" + %Folder + "\";")
+      msave("%%" + %Bookmark)
+
+      $if (len(%Name) > 1) 
+        %BookmarkGroup = "Group" + substr(%Name, 0, len(%Name) - 1);
+        eval("%%" + %BookmarkGroup + "=1;")
+        msave("%%" + %BookmarkGroup)
+      $end
+
+    $else
+
+      eval("%Folder=" + "%%" + %Bookmark + ";")
+
+      $If (%Folder)
+        $if ((substr(%Folder, 1, 1) == ":") || (substr(%Folder, 0, 2) == @"\\"))
+          panel.setpath(0,%Folder)
+        $else
+          Print(%Folder)
+          Enter
+        $end
+      $else
+        Beep(0x10);
+      $End
+
+    $end
+  $end
+}}
+
+
+
+macro Area="Shell" Description="Shell Bookmark: Menu" Key="Ctrl/"
+{{
+  %KeyS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+  $while (1==1)
+
+    %Lines = "";
+
+    %N = len(%KeyS);
+    %S = "";
+    %L = 0;
+    %I = 0;
+    $while (%I < %N)
+
+      %Key = %S + substr(%KeyS, %I, 1);
+      eval("%Folder=" + "%%Folder" + %Key + ";")
+
+      $if (%Folder)
+        %Lines = %Lines + iif(%L == 0, "&", "") + %Key + Substr("   ", 0, 3 - len(%Key)) + " - " + %Folder + "\n";
+      $end
+
+      eval("%Group=" + "%%Group" + %Key + ";")
+      $if (%Group)
+        //Push
+        eval("%Old" + %L + "=" + %I + ";")
+        %L = %L + 1;
+        %S = %Key;
+        %I = 0;
+      $end
+
+      %I = %I + 1;
+
+      $if ((%I == %N) && (%L > 0))
+        // Pop
+        %L = %L - 1;
+        %S = substr(%S, 0, len(%S) - 1);
+        eval("%I=%Old" + %L + ";")
+        %I = %I + 1;
+      $end
+    $end
+
+
+    %Res = Menu.Show(%Lines, "Bookmarks\nIns - select", 0x10);
+    $if (%Res == "")
+      $Exit
+    $end
+
+
+    $if (Index(%Res, "\n") >= 0) 
+
+      %Code = Menu.Show("&Edit\n&Delete\n&Cancel", "Bookmarks", 0x8);
+      $if (%Code == 0)
+        $Exit
+      $end
+
+      $while (%Res)
+
+        %Pos = Index(%Res, "\n");
+        $if (%Pos >= 0)
+          %Str = substr(%Res, 0, %Pos);
+          %Res = substr(%Res, %Pos + 1);
+        $else
+          %Str = %Res;
+          %Res = "";
+        $end
+
+        %Key = trim(replace(substr(%Str, 0, index(%Str, "-")), "&", ""));
+        %Bookmark = "Folder" + %Key; 
+
+        %Folder = substr(%Str, index(%Str, "-") + 2);
+
+        $if (%Code == 1)
+          %Folder = Prompt("Bookmark " + %Key, "Assign to:", 0x10, %Folder, "Shell.Bokmark");
+          $if (%Folder == 0)
+            $exit
+          $end
+
+          eval("%%" + %Bookmark + "=@\"" + %Folder + "\";")
+          msave("%%" + %Bookmark)
+        $else
+          eval("%%" + %Bookmark + "=\"\";")
+          msave("%%" + %Bookmark)
+        $end
+
+      $end
+
+      $Exit
+    $end
+
+
+    %Folder = substr(%Res, index(%Res, "-") + 2);
+
+    $If (%Folder)
+      // Goto
+      $if ((substr(%Folder, 1, 1) == ":") || (substr(%Folder, 0, 2) == @"\\"))
+        panel.setpath(0,%Folder)
+      $else
+        Print(%Folder)
+        Enter
+      $end
+      $Exit
+    $End
+
+  $end
+}}
+
