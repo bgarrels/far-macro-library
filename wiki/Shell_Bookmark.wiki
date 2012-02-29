@@ -1,4 +1,4 @@
-#summary Закладки в панелях (c) Max Rusov
+﻿#summary Закладки в панелях (c) Max Rusov
 
  * [Shell Shell Macros]
 
