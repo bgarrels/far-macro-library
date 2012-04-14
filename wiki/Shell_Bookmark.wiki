@@ -23,3 +23,11 @@
  * [http://far-macro-library.googlecode.com/svn/trunk/Shell/Bookmark.fml Download FML]
 
  * [http://far-macro-library.googlecode.com/svn/trunk/Shell/Bookmark.v2.fml Download FML v2]
+
+=== Изменения ===
+==== Shell Bookmark v2 ====
+
+ * Меню закладок отображает все закладки с любой длинной мнемоники
+ * В путях могут использоваться переменные окружения
+ * Макрос не мешает работе стандартных закладок Far (если они не перекрыты закладками макроса)
+ * Требуется Far 3 build 2576+, MacroLib v 1.0.17
