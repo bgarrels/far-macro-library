@@ -21,3 +21,5 @@
 === Текст ===
 
  * [http://far-macro-library.googlecode.com/svn/trunk/Shell/Bookmark.fml Download FML]
+
+ * [http://far-macro-library.googlecode.com/svn/trunk/Shell/Bookmark.v2.fml Download FML v2]
