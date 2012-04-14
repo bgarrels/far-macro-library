@@ -1,0 +1,236 @@
+
+;;
+;; Shell Bookmark - закладки в панелях
+;; (c) Max Rusov
+;; (i) Kerberos464
+;; http://forum.farmanager.com/viewtopic.php?f=15&t=6137
+;;
+;; RCtrlShift+БуквыИлиЦифры - Установить закладку
+;; RCtrl+БуквыИлиЦифры      - Перейти к закладке
+;; Ctrl+/                   - Меню закладок
+;;
+
+
+const MacroLib = "84884660-5B2F-4581-9282-96E00AE109A2"
+
+
+macro Area="Shell" Description="Shell Bookmark: Start"
+  Key="RCtrl:Down" EatOnRun=0
+{{
+  %%BookmarkName = "";
+}}
+
+
+macro Area="Shell" Description="Shell Bookmark: Define"
+  Key="/RCtrlShift\w/"
+{{
+  %%BookmarkMode = 1;
+  %%BookmarkName = %%BookmarkName + substr(AKey(2), -1);
+}}
+
+
+macro Area="Shell" Description="Shell Bookmark: Go to"
+  Key="/RCtrl\w/"
+{{
+  %%BookmarkMode = 0;
+  %%BookmarkName = %%BookmarkName + substr(AKey(2), -1);
+}}
+
+
+
+// Если при нажата CtrlShift и раньше отпускается Ctrl, то макрос на Ctrl:Up не вызывается
+// Это затычка, для обхода этой проблемы (ошибка в MacrLib?)
+
+macro Area="Shell" Description="Shell Bookmark: Finish" 
+  Key="Shift:Up"
+{{
+  $if (%%BookmarkName && %%BookmarkMode)
+    CallPlugin(#%MacroLib, "call GotoBookmark");
+  $end
+}}
+
+
+macro Area="Shell" Name="GotoBookmark" Description="Shell Bookmark: Finish" Priority=-1
+   Key="RCtrl:Up"
+{{
+  %Name = %%BookmarkName;
+  %%BookmarkName = "";
+
+  $if (%Name)
+    %Bookmark = "Folder" + %Name; // FolderA, FolderB, FolderC,...
+
+    $if (%%BookmarkMode)
+
+      eval("%OldFolder=" + "%%" + %Bookmark + ";")
+
+      $if (APanel.Plugin)
+        %Folder = APanel.Prefix;
+        $if (APanel.HostFile)
+          %Folder = %Folder + ":" + APanel.HostFile;
+        $end
+        %Folder = %Folder + ":" + APanel.Path;
+      $else
+        %Folder = APanel.Path;
+      $end
+
+      $if (%OldFolder)
+      	%Replace = MsgBox("Bookmark " + %Name, "Already assigned to:\n" + %OldFolder + "\n Do you want redefine it?\n", 0x40000);
+      	$if (%Replace != 1)
+      	  $exit
+      	$end
+      $end
+
+      %Folder = Prompt("Bookmark " + %Name, "Assign to:", 0x10, %Folder, "Shell.Bokmark");
+      $if (%Folder == 0)
+        $exit
+      $end
+
+      eval("%%" + %Bookmark + "=@\"" + %Folder + "\";")
+      msave("%%" + %Bookmark)
+
+    $else
+
+      eval("%Folder=" + "%%" + %Bookmark + ";")
+
+      $If (%Folder)
+
+        // Раскрываем переменные среды
+        %More = 1;
+        $while (%More)
+          %More = 0;
+          %Pos1 = Index(%Folder, "%");
+          $if (%Pos1 >= 0)
+            %Pos2 = Index(substr(%Folder, %Pos1 + 1), "%");
+            $if (%Pos2 >= 0)
+              %Env = Substr(%Folder, %Pos1 + 1, %Pos2);
+              %Folder = Replace(%Folder, "%"+%Env+"%", Env(%Env));
+              %More = 1;
+            $end
+          $end
+        $end
+
+
+        $if ((substr(%Folder, 1, 1) == ":") || (substr(%Folder, 0, 2) == @"\\"))
+          panel.setpath(0,%Folder)
+        $else
+          Print(%Folder)
+          Enter
+        $end
+      $else
+        $if ((len(%Name) == 1) && (%Name >= "0") && (%Name <= "9"))
+          // Разрешим работу стандартных шорткатов
+          eval("RCtrl" + %Name);
+        $else
+          Beep(0x10);
+        $end
+      $End
+
+    $end
+  $end
+}}
+
+
+macro Area="Shell" Description="Shell Bookmark: Menu" Key="Ctrl/"
+{{
+  $while (1==1)
+
+    %Lines = "";
+    %N = Macro.Var(0);
+    %I = 1;
+    $while (%I <= %N)
+      %Name = Macro.Var(%I, 0);
+      $if (Index(%Name, "%Folder") == 0)
+        %Key = substr(%Name, 7);
+        %Folder = Macro.Var(%I, 1);
+        $if (%Folder)
+          %Key1 = %Key;
+          $if (len(%Key1) < 3)
+            %Key1 = %Key1 + Substr("   ", 0, 3 - len(%Key1));
+          $end
+          %Lines = %Lines + iif(len(%Key) == 1, "&", "") + %Key1  + " - " + %Folder + "\n";
+        $end
+      $end
+      %I = %I + 1;
+    $end
+
+
+    %Res = Menu.Show(%Lines, "Bookmarks\nIns - select", 0x10 | 0x20);
+    $if (%Res == "")
+      $Exit
+    $end
+
+
+    $if (Index(%Res, "\n") >= 0) 
+
+      %Code = Menu.Show("&Edit\n&Delete\n&Cancel", "Bookmarks", 0x8);
+      $if (%Code == 0)
+        $Exit
+      $end
+
+      $while (%Res)
+
+        %Pos = Index(%Res, "\n");
+        $if (%Pos >= 0)
+          %Str = substr(%Res, 0, %Pos);
+          %Res = substr(%Res, %Pos + 1);
+        $else
+          %Str = %Res;
+          %Res = "";
+        $end
+
+        %Key = trim(replace(substr(%Str, 0, index(%Str, "-")), "&", ""));
+        %Bookmark = "Folder" + %Key; 
+
+        %Folder = substr(%Str, index(%Str, "-") + 2);
+
+        $if (%Code == 1)
+          %Folder = Prompt("Bookmark " + %Key, "Assign to:", 0x10, %Folder, "Shell.Bokmark");
+          $if (%Folder == 0)
+            $exit
+          $end
+
+          eval("%%" + %Bookmark + "=@\"" + %Folder + "\";")
+          msave("%%" + %Bookmark)
+        $end
+        $if (%Code == 2)
+          eval("%%" + %Bookmark + "=\"\";")
+          msave("%%" + %Bookmark)
+        $end
+
+      $end
+
+      $Exit
+    $end
+
+
+    %Folder = substr(%Res, index(%Res, "-") + 2);
+
+    $If (%Folder)
+      // Goto
+
+      // Раскрываем переменные среды
+      %More = 1;
+      $while (%More)
+        %More = 0;
+        %Pos1 = Index(%Folder, "%");
+        $if (%Pos1 >= 0)
+          %Pos2 = Index(substr(%Folder, %Pos1 + 1), "%");
+          $if (%Pos2 >= 0)
+            %Env = Substr(%Folder, %Pos1 + 1, %Pos2);
+            %Folder = Replace(%Folder, "%"+%Env+"%", Env(%Env));
+            %More = 1;
+          $end
+        $end
+      $end
+
+      $if ((substr(%Folder, 1, 1) == ":") || (substr(%Folder, 0, 2) == @"\\"))
+        panel.setpath(0,%Folder)
+      $else
+        Print(%Folder)
+        Enter
+      $end
+      $Exit
+    $End
+
+  $end
+}}
