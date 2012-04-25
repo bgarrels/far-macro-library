@@ -1,6 +1,6 @@
 ﻿#summary Переключение дисков по Ctrl+Стрелки (c) Max Rusov
 
- * [Shell Shell Macros]
+ * [Shell Макросы для панелей]
 
 === Описание ===
 

@@ -17,3 +17,5 @@
  * [Shell_ResizeFirstColumn Ресайз первой колонки панели] (с) Maximus5
 
  * [Shell_CtrlDisk Переключение дисков по Ctrl+Стрелки] (с) Max Rusov
+
+ * [Shell_CopyTo Расширение стандартного диалога копирования/перемещения] (c) Maximus5

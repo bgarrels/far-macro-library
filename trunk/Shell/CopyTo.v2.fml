@@ -1,0 +1,74 @@
+
+;; (c) Maximus5
+
+macro
+  Key="F5 F6" Cond="PanelType:0"
+  Descr="Autoappend single file name to the Copy/Move destination or Copy to selected folders on passive panel"
+{{
+  $if (Key(#Akey)=="F5" && !APanel.Plugin && (PPanel.SelCount>=1) && !PPanel.Plugin)
+    %dest="";
+    %i=1;
+    %p=PPanel.Path+"\\";
+    $while (%i<=PPanel.ItemCount)
+      $If (panel.item(1,%i,8) && (panel.item(1,%i,2) & 16))
+        %s=%p+panel.item(1,%i,0);
+        $if (index(%s,";")>=0 || index(%s,",")>=0)
+          %s="\""+%s+"\"";
+        $end
+        %dest=%dest+%s+";";
+      $End
+      %i=%i+1;
+    $End
+
+    $if (%dest!="")
+      F5
+      // Far3 - w/o brackets
+      $if (!Dialog || (Dlg.Info.Id!="FCEF11C4-5490-451D-8B4A-62FA03F52759" && Dlg.Info.Id!="{FCEF11C4-5490-451D-8B4A-62FA03F52759}"))
+        $Exit
+      $end
+
+      Del print(%dest)
+      AltM // english interface!
+      Add
+      AltO // english interface!
+
+      $Exit
+    $end
+  $end
+
+  $if (!PPanel.Plugin && APanel.SelCount<2 && PPanel.Visible && APanel.Path!=PPanel.Path)
+    Clip(5,2) CtrlShiftIns %f=replace(Clip(0),"\"","");
+    $if ((panel.fattr(0,%f) & 0x10) == 0)
+      eval(Key(#Akey))
+      End
+      print(%f)
+      Home ShiftEnd
+    $else
+      eval(Key(#Akey))
+    $end
+  $Else
+    eval(Key(#Akey))
+  $end
+
+  // Clear "Filter" checkbox
+  // Far3 - w/o brackets
+  $if (Dialog && (Dlg.Info.Id=="FCEF11C4-5490-451D-8B4A-62FA03F52759" || Dlg.Info.Id=="{FCEF11C4-5490-451D-8B4A-62FA03F52759}"))
+    $if (env("FARLANG")=="English")
+      AltU
+      $if (Dlg.CurPos==15)
+        Subtract AltO
+      $end
+    $else
+      $rep(5) ShiftTab $end
+      $if (Dlg.CurPos==15)
+        Subtract $rep(5) Tab $end
+      $end
+    $end
+  $end
+
+  $if (Key(#Akey)=="F5")
+    AltM // english interface!
+    Subtract
+    AltO // english interface!
+  $end
+}}

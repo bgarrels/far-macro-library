@@ -1,0 +1,26 @@
+#summary Autoappend single file name to the Copy/Move destination or Copy to selected folders on passive panel (с) Maximus5
+
+ * [Shell Макросы для панелей]
+
+=== Описание ===
+
+  *Основная версия*
+
+  * Клавиша: Alt+F5
+  * Выделите папки-приемники на пассивной панели, выделите копируемые файлы на активной панели, нажмите F5.
+
+  *Расширенная версия*
+
+  * Клавиши: F5, F6
+  * Если на пассивной панели выделены папки - F5 действует аналогично «Основной версии».
+  * Иначе
+    * Если копируется один файл - его имя дописывается к пути папки на пассивной панели и отображается в диалоге Copy/Move.
+    * Флажок «Фильтр» сбрасывается.
+
+  *Warning* Макрос расчитан на английский интерфейс.
+
+=== Текст ===
+
+ * [http://far-macro-library.googlecode.com/svn/trunk/Shell/CopyTo.fml Основная версия]
+
+ * [http://far-macro-library.googlecode.com/svn/trunk/Shell/CopyTo.v2.fml Расширенная версия]

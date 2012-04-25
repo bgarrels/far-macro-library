@@ -19,3 +19,5 @@ Macroses, available in the Shell context (panels)
  * [Shell_ResizeFirstColumn Smooth resize of the first panel column] (с) Maximus5
 
  * [Shell_CtrlDisk Переключение дисков по Ctrl+Стрелки] (с) Max Rusov
+
+ * [Shell_CopyTo Расширение стандартного диалога копирования/перемещения] (c) Maximus5
