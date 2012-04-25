@@ -1,0 +1,38 @@
+
+;; (c) Maximus5
+
+macro
+  Key="AltF5"
+  Descr="Copy to selected folders on passive panel"
+  Area="Shell"
+{{
+  $if (APanel.Plugin || (PPanel.SelCount<1) || PPanel.Plugin)
+    F5
+    $Exit
+  $end
+
+  %dest="";
+  %i=1;
+  %p=PPanel.Path+"\\";
+  $while (%i<=PPanel.ItemCount)
+    $If (panel.item(1,%i,8) && (panel.item(1,%i,2) & 16))
+      %s=%p+panel.item(1,%i,0);
+      $if (index(%s,";")>=0 || index(%s,",")>=0)
+        %s="\""+%s+"\"";
+      $end
+      %dest=%dest+%s+";";
+    $End
+    %i=%i+1;
+  $End
+
+  F5
+  // Far3 - w/o brackets
+  $if (!Dialog || (Dlg.Info.Id!="FCEF11C4-5490-451D-8B4A-62FA03F52759" && Dlg.Info.Id!="{FCEF11C4-5490-451D-8B4A-62FA03F52759}"))
+    $Exit
+  $end
+
+  Del print(%dest)
+  AltM // english interface!
+  Add
+  AltO // english interface!
+}}
