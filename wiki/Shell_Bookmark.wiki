@@ -24,6 +24,8 @@
 
  * [http://far-macro-library.googlecode.com/svn/trunk/Shell/Bookmark.v2.fml Download FML v2]
 
+ * [http://far-macro-library.googlecode.com/svn/trunk/Shell/Bookmark.fmlua Download FMLUA v3]
+
 === Изменения ===
 ==== Shell Bookmark v2 ====
 
@@ -31,3 +33,7 @@
  * В путях могут использоваться переменные окружения
  * Макрос не мешает работе стандартных закладок Far (если они не перекрыты закладками макроса)
  * Требуется Far 3 build 2576+, MacroLib v 1.0.17
+
+==== Shell Bookmark v3 ====
+
+ * LUA Версия (Требуется Far 3 build 2851+, MacroLib v 1.0.19+)
