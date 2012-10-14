@@ -45,7 +45,7 @@ macro Area="Shell" Description="Shell Bookmark: Finish"
   Key="Shift:Up"
 {{
   if (_G.BookmarkName ~= "") and _G.BookmarkMode then
-    Plugin.Call(#%MacroLib, "call GotoBookmark");
+    Plugin.Command(#%MacroLib, "call GotoBookmark");
   end
 }}
 
