@@ -24,7 +24,7 @@
 
  * [http://far-macro-library.googlecode.com/svn/trunk/Shell/Bookmark.v2.fml Download FML v2]
 
- * [http://far-macro-library.googlecode.com/svn/trunk/Shell/Bookmark.fmlua Download FMLUA v3]
+ * [http://far-macro-library.googlecode.com/svn/trunk/Shell/Bookmark.fmlua Download FMLUA v4]
 
 === Изменения ===
 ==== Shell Bookmark v2 ====
@@ -37,3 +37,7 @@
 ==== Shell Bookmark v3 ====
 
  * LUA Версия (Требуется Far 3 build 2851+, MacroLib v 1.0.19+)
+
+==== Shell Bookmark v4 ====
+
+ * Оптимизированная LUA Версия (Требуется MacroLib v 1.0.20+)
