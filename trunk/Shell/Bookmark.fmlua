@@ -26,7 +26,7 @@ macro Area="Shell" Description="Shell Bookmark: Define"
   Key="/RCtrlShift\w/"
 {{
   _G.BookmarkMode = true;
-  _G.BookmarkName = _G.BookmarkName .. mf.substr(mf.akey(2), -1);
+  _G.BookmarkName = _G.BookmarkName .. mf.akey(2):sub(-1)
 }}
 
 
@@ -34,18 +34,22 @@ macro Area="Shell" Description="Shell Bookmark: Go to"
   Key="/RCtrl\w/"
 {{
   _G.BookmarkMode = false;
-  _G.BookmarkName = _G.BookmarkName .. mf.substr(mf.akey(2), -1);
+  _G.BookmarkName = _G.BookmarkName .. mf.akey(2):sub(-1)
 }}
 
 
 // Если при нажата CtrlShift и раньше отпускается Ctrl, то макрос на Ctrl:Up не вызывается
 // Это затычка, для обхода этой проблемы (ошибка в MacrLib?)
 
-macro Area="Shell" Description="Shell Bookmark: Finish" 
+macro Area="Shell" Description="Shell Bookmark: Finish" Priority=-1
   Key="Shift:Up"
 {{
-  if (_G.BookmarkName ~= "") and _G.BookmarkMode then
-    Plugin.Command(#%MacroLib, "call GotoBookmark");
+  #include_macro_once "BookmarkFunc"
+
+  if _G.BookmarkName and _G.BookmarkMode then
+    Name = _G.BookmarkName
+    _G.BookmarkName = nil
+    _G.ShellBookmarkGoto(Name, true)
   end
 }}
 
@@ -54,33 +58,56 @@ macro Area="Shell" Description="Shell Bookmark: Finish"
 macro Area="Shell" Name="GotoBookmark" Description="Shell Bookmark: Finish" Priority=-1
    Key="RCtrl:Up"
 {{
+  #include_macro_once "BookmarkFunc"
 
+  if _G.BookmarkName then
+    Name = _G.BookmarkName
+    _G.BookmarkName = nil
+    _G.ShellBookmarkGoto(Name, _G.BookmarkMode)
+  end
+}}
+
+
+
+macro Area="Shell" Description="Shell Bookmark: Menu" Key="Ctrl/"
+{{
+  #include_macro_once "BookmarkFunc"
+
+  _G.ShellBookmarkMenu()
+}}
+
+
+
+//-----------------------------------------------------------------------------
+// Глобальные функции
+
+
+macro Name="BookmarkFunc"
+{{
   function ExpandEnv(Str)
-    More = true;
-    while More do
-      More = false
-      Pos1 = mf.index(Str, "%");
-      if Pos1 >= 0 then
-        Pos2 = mf.index(mf.substr(Str, Pos1 + 1), "%");
-        if Pos2 >= 0 then
-          Env = mf.substr(Str, Pos1 + 1, Pos2);
-          Str = mf.replace(Str, "%" .. Env .. "%", mf.env(Env))
-          More = true
-        end
-      end
-    end 
-    return Str
+    return (Str:gsub("%%(.-)%%", win.GetEnv))
   end
 
 
-  Name = _G.BookmarkName;
-  _G.BookmarkName = "";
+  function EnumSettings(keyname)
+    local obj = far.CreateSettings()
+    local key = obj:OpenSubkey(0, keyname)
+    local res = key and obj:Enum(key)
+    obj:Free()
+    return res
+  end
 
-  if Name ~= "" then
-    Bookmark = "Folder" .. Name; -- FolderA, FolderB, FolderC,...
+ 
+  function _G.ShellBookmarkGoto(Name, Define)
+    if not Name or (Name == "") then
+      return
+    end
 
-    if _G.BookmarkMode then
-      OldFolder = mf.mload("ShellBookmark", Bookmark)
+    local Bookmark = "Folder" .. Name; -- FolderA, FolderB, FolderC,...
+    local Folder = ""
+
+    if Define then
+      local OldFolder = mf.mload("ShellBookmark", Bookmark)
 
       if APanel.Plugin then
         Folder = APanel.Prefix
@@ -93,10 +120,10 @@ macro Area="Shell" Name="GotoBookmark" Description="Shell Bookmark: Finish" Prio
       end
 
       if OldFolder ~= nil then
-      	Replace = msgbox("Bookmark " .. Name, "Already assigned to:\n" .. OldFolder .. "\n Do you want redefine it?\n", 0x40000);
-      	if Replace ~= 1 then
+        Replace = msgbox("Bookmark " .. Name, "Already assigned to:\n" .. OldFolder .. "\n Do you want redefine it?\n", 0x40000);
+        if Replace ~= 1 then
           return
-      	end
+        end
       end
 
       Folder = prompt("Bookmark " .. Name, "Assign to:", 0x10, Folder, "Shell.Bokmark");
@@ -136,115 +163,86 @@ macro Area="Shell" Name="GotoBookmark" Description="Shell Bookmark: Finish" Prio
       end
     end
   end
-}}
+  
+  function _G.ShellBookmarkMenu()
+    while true do
+      Folders = EnumSettings("ShellBookmark")
 
-
-
-macro Area="Shell" Description="Shell Bookmark: Menu" Key="Ctrl/"
-{{
-  function EnumSettings(keyname)
-    obj = far.CreateSettings()
-    key = obj:OpenSubkey(0, keyname)
-    res = key and obj:Enum(key)
-    obj:Free()
-    return res
-  end
-
-  function ExpandEnv(Str)
-    More = true;
-    while More do
-      More = false
-      Pos1 = mf.index(Str, "%");
-      if Pos1 >= 0 then
-        Pos2 = mf.index(mf.substr(Str, Pos1 + 1), "%");
-        if Pos2 >= 0 then
-          Env = mf.substr(Str, Pos1 + 1, Pos2);
-          Str = mf.replace(Str, "%" .. Env .. "%", mf.env(Env))
-          More = true
-        end
-      end
-    end 
-    return Str
-  end
-
-
-  while true do
-    Folders = EnumSettings("ShellBookmark")
-
-    Lines = ""
-    for i = 1, Folders.Count do
-      Name = Folders[i].Name
-      if mf.index(Name, "Folder") == 0 then
-        Key = mf.substr(Name, 6)
-        Folder = mf.mload("ShellBookmark", Name)
-        if Folder then
-          Key1 = Key
-          if Key1:len() < 3 then
-            Key1 = Key1 .. mf.substr("   ", 0, 3 - Key1:len());
+      Lines = ""
+      for i = 1, Folders.Count do
+        Name = Folders[i].Name
+        if mf.index(Name, "Folder") == 0 then
+          Key = mf.substr(Name, 6)
+          Folder = mf.mload("ShellBookmark", Name)
+          if Folder then
+            Key1 = Key
+            if Key1:len() < 3 then
+              Key1 = Key1 .. mf.substr("   ", 0, 3 - Key1:len());
+            end
+            Lines = Lines .. (Key:len() == 1 and "&" or "") .. Key1 .. " - " .. Folder .. "\n";
           end
-          Lines = Lines .. (Key:len() == 1 and "&" or "") .. Key1 .. " - " .. Folder .. "\n";
         end
       end
-    end
 
-    Res = Menu.Show(Lines, "Bookmarks\nIns - select", 0x10 or 0x20)
-    if Res == "" then
-      return
-    end
-
-    if mf.index(Res, "\n") >= 0 then
-
-      Code = Menu.Show("&Edit\n&Delete\n&Cancel", "Bookmarks", 0x8);
-      if Code == 0 then
+      Res = Menu.Show(Lines, "Bookmarks\nIns - select", 0x10 or 0x20)
+      if Res == "" then
         return
       end
 
-      while (Res ~= "") do
+      if mf.index(Res, "\n") >= 0 then
 
-        Pos = mf.index(Res, "\n");
-        if Pos >= 0 then
-          Str = mf.substr(Res, 0, Pos);
-          Res = mf.substr(Res, Pos + 1);
-        else
-          Str = Res;
-          Res = "";
+        Code = Menu.Show("&Edit\n&Delete\n&Cancel", "Bookmarks", 0x8);
+        if Code == 0 then
+          return
         end
 
-        Key = mf.trim(mf.replace(mf.substr(Str, 0, mf.index(Str, "-")), "&", ""));
-        Bookmark = "Folder" .. Key; 
+        while (Res ~= "") do
 
-        Folder = mf.substr(Str, mf.index(Str, "-") + 2);
-
-        if Code == 1 then
-          Folder = prompt("Bookmark " .. Key, "Assign to:", 0x10, Folder, "Shell.Bokmark");
-          if Folder == false then
-            return
+          Pos = mf.index(Res, "\n");
+          if Pos >= 0 then
+            Str = mf.substr(Res, 0, Pos);
+            Res = mf.substr(Res, Pos + 1);
+          else
+            Str = Res;
+            Res = "";
           end
-          mf.msave("ShellBookmark", Bookmark, Folder)
-        end
-        if Code == 2 then
-          mf.mdelete("ShellBookmark", Bookmark)
+
+          Key = mf.trim(mf.replace(mf.substr(Str, 0, mf.index(Str, "-")), "&", ""));
+          Bookmark = "Folder" .. Key; 
+
+          Folder = mf.substr(Str, mf.index(Str, "-") + 2);
+
+          if Code == 1 then
+            Folder = prompt("Bookmark " .. Key, "Assign to:", 0x10, Folder, "Shell.Bokmark");
+            if Folder == false then
+              return
+            end
+            mf.msave("ShellBookmark", Bookmark, Folder)
+          end
+          if Code == 2 then
+            mf.mdelete("ShellBookmark", Bookmark)
+          end
+
         end
 
+        return
       end
 
-      return
-    end
+      Folder = mf.substr(Res, mf.index(Res, "-") + 2);
 
-    Folder = mf.substr(Res, mf.index(Res, "-") + 2);
+      if Folder then
+        -- Goto
+        Folder = ExpandEnv(Folder)
 
-    if Folder then
-      -- Goto
-      Folder = ExpandEnv(Folder)
+        if (mf.substr(Folder, 1, 1) == ":") or (mf.substr(Folder, 0, 2) == "\\\\") then
+          Panel.SetPath(0, Folder)
+        else
+          print(Folder)
+          Keys("Enter")
+        end
 
-      if (mf.substr(Folder, 1, 1) == ":") or (mf.substr(Folder, 0, 2) == "\\\\") then
-        Panel.SetPath(0, Folder)
-      else
-        print(Folder)
-        Keys("Enter")
+        return
       end
-
-      return
     end
   end
 }}
