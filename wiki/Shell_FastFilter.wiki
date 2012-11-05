@@ -23,7 +23,7 @@
  * [http://far-macro-library.googlecode.com/svn/trunk/Shell/FastFilter.v3.fml Загрузить FML v3]
  * [http://far-macro-library.googlecode.com/svn/trunk/Shell/FastFilter.v4.fml Загрузить FML v4]
  * [http://far-macro-library.googlecode.com/svn/trunk/Shell/FastFilter.v5.fml Загрузить FML v5]
- * [http://far-macro-library.googlecode.com/svn/trunk/Shell/FastFilter.fmlua Загрузить FML v6]
+ * [http://far-macro-library.googlecode.com/svn/trunk/Shell/FastFilter.fmlua Загрузить FMLUA v6]
 
 === Изменения ===
 ==== 110204 Maximus5 (v2) ====
