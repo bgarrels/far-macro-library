@@ -1,4 +1,4 @@
-#summary Быстрая фильтрация в панелях (c) Max Rusov
+﻿#summary Быстрая фильтрация в панелях (c) Max Rusov
 
  * [Shell Shell Macros]
 
@@ -18,11 +18,12 @@
 
 === Текст ===
 
- * [http://far-macro-library.googlecode.com/svn/trunk/Shell/FastFilter.fml Download FML]
- * [http://far-macro-library.googlecode.com/svn/trunk/Shell/FastFilter.v2.fml Download FML v2]
+ * [http://far-macro-library.googlecode.com/svn/trunk/Shell/FastFilter.fml Загрузить FML]
+ * [http://far-macro-library.googlecode.com/svn/trunk/Shell/FastFilter.v2.fml Загрузить FML v2]
  * [http://far-macro-library.googlecode.com/svn/trunk/Shell/FastFilter.v3.fml Загрузить FML v3]
  * [http://far-macro-library.googlecode.com/svn/trunk/Shell/FastFilter.v4.fml Загрузить FML v4]
  * [http://far-macro-library.googlecode.com/svn/trunk/Shell/FastFilter.v5.fml Загрузить FML v5]
+ * [http://far-macro-library.googlecode.com/svn/trunk/Shell/FastFilter.fmlua Загрузить FML v6]
 
 === Изменения ===
 ==== 110204 Maximus5 (v2) ====
@@ -40,3 +41,5 @@
   * во время ввода фильтра он "печатается" к ком.строке
   * во время ввода фильтра RAltBS удаляет последний введенный символ
   * однократное нажатие RAlt открывает QSearch с введенным "*"
+==== Fast Filter v6 ====
+  * LUA Версия (Требуется Far 3 build 2851+, MacroLib v 1.0.20+)
