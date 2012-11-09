@@ -4,6 +4,8 @@ Please, translate
 
 Макросы доступные в контексте Editor
 
+ * [Editor_BlockComment Закомментировать выделенный блок]
+
  * [Editor_CopyWord Копировать текущее слово]
 
  * [Editor_DeleteSpaces Macro remove trailing spaces and tabs] (с) SimSU
