@@ -4,7 +4,7 @@ Please, translate
 
 Макросы доступные в контексте Editor
 
- * [Editor_BlockComment Закомментировать выделенный блок]
+ * [Editor_BlockComment Закомментировать выделенный блок] (c) Max Rusov
 
  * [Editor_CopyWord Копировать текущее слово]
 
