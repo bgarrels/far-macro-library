@@ -6,6 +6,8 @@ Please, translate
 
  * [Editor_BlockComment Закомментировать выделенный блок] (c) Max Rusov
 
+ * [Editor_EasyTemplate Шаблоны автоподстановки] (c) Max Rusov
+
  * [Editor_CopyWord Копировать текущее слово]
 
  * [Editor_DeleteSpaces Macro remove trailing spaces and tabs] (с) SimSU
