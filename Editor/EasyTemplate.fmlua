@@ -3,7 +3,6 @@
 ;; (c) Max Rusov
 ;;
 
-
 macro Descr="Easy Template: expand template" Area="Editor" Keys="Space"
 {{
   #include_macro_once "EasyTemplateCommonSettings"
@@ -41,24 +40,24 @@ macro Descr="Easy Template: List of all templates" Area="Editor" Keys="CtrlShift
 
 macro Name="TemplateFunc"
 {{
-  function StrIn(AStr, AListStr)
+  function StrIn(AStr, AListStr, APart)
     local iStr
     for iStr in AListStr:gmatch("[^%s,]+") do
-      if iStr:gsub(AStr, "") == "" then
+      if (iStr == AStr) or (APart and (iStr:find(AStr) == 1)) then
         return true
       end
     end
     return false
   end
+   
 
-
-  function FindTemplate(AName, AWord)
+  function FindTemplate(AName, AWord, APart)
     local vExt = mf.fsplit(AName, 8):sub(2):lower()
     local vTpl = {}
     for i, vRow in ipairs(Settings) do
       if StrIn(vExt, vRow[1]) then
         for j, vTempl in ipairs(vRow[2]) do
-          if not AWord or StrIn(AWord, vTempl[1]) then
+          if not AWord or StrIn(AWord, vTempl[1], APart) then
             vTpl[#vTpl + 1] = vTempl
           end
         end
@@ -170,7 +169,7 @@ macro Name="TemplateFunc"
 
     InsertTemplate(Id, vWord:len(), vTemplate)
     return true
-  end
+  end 
 
 
   function _G.EasyTemplateList(Id)
@@ -182,7 +181,7 @@ macro Name="TemplateFunc"
     end
     local vWord = vRowStr:sub(i + 1, n)
 
-    local vTemplate = FindTemplate( Editor.FileName, vWord .. ".*" )
+    local vTemplate = FindTemplate( Editor.FileName, vWord, true )
     if not vTemplate then
       if vTemplate == nil then  
         mf.beep()                
