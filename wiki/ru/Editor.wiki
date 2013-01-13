@@ -13,3 +13,5 @@
  * [Editor_SaveAll Сохранить все окна редакторов, в которых есть изменения] (с) Maximus5
 
  * [EDITOR_IncrementSearch Быстрый поиск в редакторе] (с) SimSU (i) Maximus5
+
+ * [Eitor_ChangeCodepage Переключение кодовых страниц в редакторе] (с) Max Rusov
