@@ -1,4 +1,4 @@
-#summary Информация по текущей MacroArea/GUID диалога
+﻿#summary Информация по текущей MacroArea/GUID диалога
 #sidebar TableOfContents
 
  * [Common Общие макросы]
@@ -11,6 +11,7 @@
 
  * [http://far-macro-library.googlecode.com/svn/trunk/Common/MacroAreaInfo.fml Загрузить FML]
  * [http://far-macro-library.googlecode.com/svn/trunk/Common/MacroAreaInfo.v2.fml Загрузить FML v2]
+ * [http://far-macro-library.googlecode.com/svn/trunk/Common/MacroAreaInfo.v3.fmlua Загрузить FML v3]
 
 === История ===
 
