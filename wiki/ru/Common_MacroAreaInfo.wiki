@@ -11,7 +11,7 @@
 
  * [http://far-macro-library.googlecode.com/svn/trunk/Common/MacroAreaInfo.fml Загрузить FML]
  * [http://far-macro-library.googlecode.com/svn/trunk/Common/MacroAreaInfo.v2.fml Загрузить FML v2]
- * [http://far-macro-library.googlecode.com/svn/trunk/Common/MacroAreaInfo.v3.fmlua Загрузить FML v3]
+ * [http://far-macro-library.googlecode.com/svn/trunk/Common/MacroAreaInfo.v3.fmlua Загрузить FMLUA v3]
 
 === История ===
 
